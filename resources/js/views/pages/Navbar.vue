@@ -3,7 +3,7 @@
     <v-navigation-drawer v-model="drawer" :clipped="$vuetify.breakpoint.lgAndUp" app>
         <div style="text-align:center;" class="mt-5">
             <h6 style="font-family: Trebuchet MS">{{user_details.firstname}} {{user_details.lastname}}</h6>
-            <v-chip outlined small color="#F28DBC">
+            <v-chip outlined small color="teal">
 
                 <v-icon left>mdi-account-circle</v-icon>
                 <span style="font-family: Trebuchet MS">LOGGED-IN AS {{role}}</span>
@@ -12,7 +12,7 @@
         </div>
         <hr>
         <v-list dense>
-            <template v-for="item in items" :to="item.to">
+            <template v-for="item in items" :to="item.to" v-show="item.accessibleBy.includes(user_details.role)">
                 <v-row v-if="item.heading" :key="item.heading" align="center">
                     <v-col cols="6">
                         <v-subheader v-if="item.heading">
@@ -23,7 +23,7 @@
                         <a href="#!" class="body-2 black--text">EDIT</a>
                     </v-col>
                 </v-row>
-                <v-list-group v-else-if="item.children" :key="item.text" v-model="item.model" :prepend-icon="item.model ? item.icon : item['icon-alt']">
+                <v-list-group v-else-if="item.children" :key="item.text" v-model="item.model" :prepend-icon="item.model ? item.icon : item['icon-alt']" v-show="item.accessibleBy.includes(user_details.role)">
                     <template v-slot:activator>
                         <v-list-item-content>
                             <v-list-item-title>
@@ -31,7 +31,7 @@
                             </v-list-item-title>
                         </v-list-item-content>
                     </template>
-                    <v-list-item class="a" v-for="(child, i) in item.children" :key="i" link :to="child.to">
+                    <v-list-item class="a" v-for="(child, i) in item.children" :key="i" link :to="child.to" v-show="item.accessibleBy.includes(user_details.role)">
                         <v-list-item-action v-if="child.icon">
                             <v-icon>{{ child.icon }}</v-icon>
                         </v-list-item-action>
@@ -42,7 +42,7 @@
                         </v-list-item-content>
                     </v-list-item>
                 </v-list-group>
-                <v-list-item class="a" v-else :key="item.text" link :to="item.to">
+                <v-list-item class="a" v-else :key="item.text" link :to="item.to" v-show="item.accessibleBy.includes(user_details.role)">
                     <v-list-item-action>
                         <v-icon>{{ item.icon }}</v-icon>
                     </v-list-item-action>
@@ -56,7 +56,7 @@
         </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar :clipped-left="$vuetify.breakpoint.lgAndUp" app dense color="#F28DBC" dark>
+    <v-app-bar :clipped-left="$vuetify.breakpoint.lgAndUp" app dense color="teal" dark>
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-toolbar-title style="width: 300px" class="ml-0 pl-4">
             <span class="hidden-sm-and-down">EXPENSE MANAGER</span>
@@ -72,6 +72,7 @@
 <script>
 
 export default {
+
     data: () => ({
         dialog: false,
         drawer: null,
@@ -81,21 +82,25 @@ export default {
                 icon: 'mdi-cash',
                 text: 'My Expenses',
                 to: 'new_expense',
+                accessibleBy: [1, 2]
             },
              {
                 icon: 'mdi-chart-bar',
                 text: 'Expense Chart',
-                to: 'expense_chart'
+                to: 'expense_chart',
+                accessibleBy: [1, 2]
             },
             {
                 icon: 'mdi-account-key',
                 text: 'Change Password',
-                to: 'change_password'
+                to: 'change_password',
+                accessibleBy: [1, 2]
             },
             {
                 icon: 'mdi-chevron-up',
                 'icon-alt': 'mdi-chevron-down',
                 text: 'Settings',
+                accessibleBy: [1],
                 children: [{
                         icon: 'mdi-plus',
                         text: 'Expense Category',
@@ -146,7 +151,7 @@ export default {
 <style scoped>
 .a:hover {
     cursor: pointer;
-    color: #F28DBC;
+    color: teal;
     text-decoration: none;
 }
 </style>

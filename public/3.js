@@ -692,7 +692,7 @@ var render = function() {
                       staticClass: "white--text",
                       attrs: {
                         fab: "",
-                        color: "#F28DBC",
+                        color: "teal",
                         bottom: "",
                         right: "",
                         absolute: ""
@@ -743,7 +743,7 @@ var render = function() {
                     "th",
                     {
                       staticStyle: {
-                        "background-color": "#F28DBC",
+                        "background-color": "teal",
                         color: "white"
                       }
                     },
@@ -754,7 +754,7 @@ var render = function() {
                     "th",
                     {
                       staticStyle: {
-                        "background-color": "#F28DBC",
+                        "background-color": "teal",
                         color: "white"
                       }
                     },
@@ -765,7 +765,7 @@ var render = function() {
                     "th",
                     {
                       staticStyle: {
-                        "background-color": "#F28DBC",
+                        "background-color": "teal",
                         color: "white"
                       }
                     },
@@ -776,7 +776,7 @@ var render = function() {
                     "th",
                     {
                       staticStyle: {
-                        "background-color": "#F28DBC",
+                        "background-color": "teal",
                         color: "white"
                       }
                     },
@@ -787,7 +787,7 @@ var render = function() {
                     "th",
                     {
                       staticStyle: {
-                        "background-color": "#F28DBC",
+                        "background-color": "teal",
                         color: "white"
                       }
                     },
@@ -798,7 +798,7 @@ var render = function() {
                     "th",
                     {
                       staticStyle: {
-                        "background-color": "#F28DBC",
+                        "background-color": "teal",
                         color: "white"
                       }
                     },
@@ -809,7 +809,7 @@ var render = function() {
                     "th",
                     {
                       staticStyle: {
-                        "background-color": "#F28DBC",
+                        "background-color": "teal",
                         color: "white"
                       }
                     },

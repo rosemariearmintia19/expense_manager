@@ -28,6 +28,7 @@
         "apexcharts": "^3.29.0",
         "chart.js": "^2.9.4",
         "echarts": "^5.2.1",
+        "highcharts-vue": "^1.4.0",
         "moment": "^2.29.1",
         "vue-apexcharts": "^1.6.2",
         "vue-echarts": "^6.0.0",

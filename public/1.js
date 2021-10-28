@@ -90,19 +90,23 @@ __webpack_require__.r(__webpack_exports__);
       items: [{
         icon: 'mdi-cash',
         text: 'My Expenses',
-        to: 'new_expense'
+        to: 'new_expense',
+        accessibleBy: [1, 2]
       }, {
         icon: 'mdi-chart-bar',
         text: 'Expense Chart',
-        to: 'expense_chart'
+        to: 'expense_chart',
+        accessibleBy: [1, 2]
       }, {
         icon: 'mdi-account-key',
         text: 'Change Password',
-        to: 'change_password'
+        to: 'change_password',
+        accessibleBy: [1, 2]
       }, {
         icon: 'mdi-chevron-up',
         'icon-alt': 'mdi-chevron-down',
         text: 'Settings',
+        accessibleBy: [1],
         children: [{
           icon: 'mdi-plus',
           text: 'Expense Category',
@@ -157,7 +161,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.a[data-v-e872688c]:hover {\r\n    cursor: pointer;\r\n    color: #F28DBC;\r\n    text-decoration: none;\n}\r\n", ""]);
+exports.push([module.i, "\n.a[data-v-e872688c]:hover {\r\n    cursor: pointer;\r\n    color: teal;\r\n    text-decoration: none;\n}\r\n", ""]);
 
 // exports
 
@@ -239,7 +243,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "v-chip",
-                { attrs: { outlined: "", small: "", color: "#F28DBC" } },
+                { attrs: { outlined: "", small: "", color: "teal" } },
                 [
                   _c("v-icon", { attrs: { left: "" } }, [
                     _vm._v("mdi-account-circle")
@@ -311,6 +315,17 @@ var render = function() {
                     ? _c(
                         "v-list-group",
                         {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: item.accessibleBy.includes(
+                                _vm.user_details.role
+                              ),
+                              expression:
+                                "item.accessibleBy.includes(user_details.role)"
+                            }
+                          ],
                           key: item.text,
                           attrs: {
                             "prepend-icon": item.model
@@ -358,6 +373,17 @@ var render = function() {
                             return _c(
                               "v-list-item",
                               {
+                                directives: [
+                                  {
+                                    name: "show",
+                                    rawName: "v-show",
+                                    value: item.accessibleBy.includes(
+                                      _vm.user_details.role
+                                    ),
+                                    expression:
+                                      "item.accessibleBy.includes(user_details.role)"
+                                  }
+                                ],
                                 key: i,
                                 staticClass: "a",
                                 attrs: { link: "", to: child.to }
@@ -398,6 +424,17 @@ var render = function() {
                     : _c(
                         "v-list-item",
                         {
+                          directives: [
+                            {
+                              name: "show",
+                              rawName: "v-show",
+                              value: item.accessibleBy.includes(
+                                _vm.user_details.role
+                              ),
+                              expression:
+                                "item.accessibleBy.includes(user_details.role)"
+                            }
+                          ],
                           key: item.text,
                           staticClass: "a",
                           attrs: { link: "", to: item.to }
@@ -441,7 +478,7 @@ var render = function() {
             "clipped-left": _vm.$vuetify.breakpoint.lgAndUp,
             app: "",
             dense: "",
-            color: "#F28DBC",
+            color: "teal",
             dark: ""
           }
         },

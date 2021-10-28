@@ -6,7 +6,7 @@
                 Expense Category List
             </v-toolbar-title>
             <template v-slot:extension>
-                <v-btn fab color="#F28DBC" class="white--text" bottom right absolute @click="dialog = !dialog">
+                <v-btn fab color="teal" class="white--text" bottom right absolute @click="dialog = !dialog">
                     <v-icon>mdi-plus</v-icon>
                 </v-btn>
             </template>
@@ -15,10 +15,10 @@
         <v-simple-table class="mt-2" dense fixed-header height="400">
             <thead>
                 <tr>
-                    <th style="background-color:#F28DBC;color:white">No.</th>
-                    <th style="background-color:#F28DBC;color:white">Category Name</th>
-                    <th style="background-color:#F28DBC;color:white">Status</th>
-                    <th style="background-color:#F28DBC;color:white">Actions</th>
+                    <th style="background-color:teal;color:white">No.</th>
+                    <th style="background-color:teal;color:white">Category Name</th>
+                    <th style="background-color:teal;color:white">Status</th>
+                    <th style="background-color:teal;color:white">Actions</th>
                 </tr>
             </thead>
             <tbody>

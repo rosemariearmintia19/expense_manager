@@ -6,7 +6,7 @@
                 User List
             </v-toolbar-title>
             <template v-slot:extension>
-                <v-btn fab color="#F28DBC" class="white--text" bottom right absolute @click="dialog = !dialog">
+                <v-btn fab color="teal" class="white--text" bottom right absolute @click="dialog = !dialog">
                     <v-icon>mdi-plus</v-icon>
                 </v-btn>
             </template>
@@ -15,13 +15,13 @@
         <v-simple-table dense fixed-header height="400">
             <thead>
                 <tr>
-                    <th style="background-color:#F28DBC;color:white">No.</th>
-                    <th style="background-color:#F28DBC;color:white">Firstname</th>
-                    <th style="background-color:#F28DBC;color:white">LastName</th>
-                    <th style="background-color:#F28DBC;color:white">Email</th>
-                    <th style="background-color:#F28DBC;color:white">Role</th>
-                    <th style="background-color:#F28DBC;color:white">Status</th>
-                    <th style="background-color:#F28DBC;color:white">Actions</th>
+                    <th style="background-color:teal;color:white">No.</th>
+                    <th style="background-color:teal;color:white">Firstname</th>
+                    <th style="background-color:teal;color:white">LastName</th>
+                    <th style="background-color:teal;color:white">Email</th>
+                    <th style="background-color:teal;color:white">Role</th>
+                    <th style="background-color:teal;color:white">Status</th>
+                    <th style="background-color:teal;color:white">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -68,7 +68,7 @@
     </v-card>
     <v-dialog v-model="dialog" max-width="400px">
         <v-card>
-            <v-card-title style="background-color:#F28DBC;color:white">
+            <v-card-title style="background-color:teal;color:white">
                 <span class="headline">{{ formTitle }}</span>
             </v-card-title>
             <v-card-text>

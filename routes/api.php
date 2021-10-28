@@ -73,4 +73,6 @@ Route::post('RestorePermission','RoleController@RestorePermission');
 
 Route::get('GetRoles','RoleController@GetRoles');
 
+Route::post('GetTotalExpenses','ExpenseController@GetTotalExpenses');
+
 

@@ -5,14 +5,14 @@
             <v-container style="position: relative;top: 5%;" class="text-xs-center">
                 <v-form>
                     <center>
-                        <h1 style="color:#F28DBC" class="mt-10 mb-5">Password Reset</h1>
-                        <v-text-field id="old_password" name="OldPass" outlined v-model="old_password" :rules="[() => !!old_password || 'This field is required']" :error-messages="errorMessages" label="Old Password" type="password" required v-on:blur="check_old_password"></v-text-field>
+                        <h1 style="color:teal" class="mt-10 mb-5">Reset Password</h1>
+                        <v-text-field id="old_password" name="OldPass" outlined v-model="old_password" :rules="[() => !!old_password || 'This field is required']" :error-messages="errorMessages" label="Old Password" required v-on:blur="check_old_password" :append-icon="show5 ? 'mdi-eye' : 'mdi-eye-off'" :type="show5 ? 'text' : 'password'" @click:append="show5 = !show5"></v-text-field>
                         <div class="mt-n6" style="color:red;text-align:left" id="op">{{ old_alert }}</div>
-                        <v-text-field id="new_password" name="NewPass" outlined v-model="new_password" :rules="[() => !!new_password || 'This field is required']" :error-messages="errorMessages" label="New Password" type="password" required></v-text-field>
-                        <v-text-field id="re_password" v-on:blur="CheckPassword"  v-model="re_password" :rules="[() => !!re_password || 'This field is required']" :error-messages="errorMessages" name="re_password" outlined label="Re-enter Password" type="password"></v-text-field>
+                        <v-text-field id="new_password" name="NewPass" outlined v-model="new_password" :rules="[() => !!new_password || 'This field is required']" :error-messages="errorMessages" label="New Password" required :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'" :type="show1 ? 'text' : 'password'" @click:append="show1 = !show1"></v-text-field>
+                        <v-text-field id="re_password" v-on:blur="CheckPassword"  v-model="re_password" :rules="[() => !!re_password || 'This field is required']" :error-messages="errorMessages" name="re_password" outlined label="Re-enter Password" :type="show3 ? 'text' : 'password'" :append-icon="show3 ? 'mdi-eye' : 'mdi-eye-off'"  @click:append="show3 = !show3"></v-text-field>
                         <div class="mt-n5" style="color:red;text-align:left" id="alert" v-if="alert">{{ alert }}</div>
                         <v-card-actions>
-                            <v-btn class="mb-10" primary @click="SaveNewPassword()" large block color="#F28DBC" style="color:white">Save</v-btn>
+                            <v-btn class="mb-10" primary @click="SaveNewPassword()" large block color="teal" style="color:white">Save</v-btn>
                         </v-card-actions>
                     </center>
                 </v-form>
@@ -33,7 +33,13 @@ export default {
             errorMessages: '',
             old_alert:'',
             alert: "",
-            op: ''
+            op: '',
+            show1: false,
+            show2: true,
+            show3: false,
+            show4: true,
+            show5: false,
+            show6: true,
         }
 
     },

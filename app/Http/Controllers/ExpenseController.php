@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Expense;
 use Carbon\Carbon;
+use DB;
 
 class ExpenseController extends Controller
 {
@@ -50,4 +51,35 @@ class ExpenseController extends Controller
         ->select('users.firstname','users.lastname','expenses.expense_id','ec.category_name','expenses.description','expenses.description','expenses.amount','expenses.created_at','expenses.deleted_at')
         ->get();
     }
+
+    public function GetTotalExpenses(Request $request){
+    //    $sum = Expense::join('expense_categories as ec','ec.category_id','expenses.category_id')
+    //             ->groupBy('ec.category_id','expenses.category_id','expenses.expense_id')
+    //             ->selectRaw('*, sum(expenses.amount) as sum')
+    //             ->get();
+    //     return $sum;
+
+        $expensesall = Expense::join('expense_categories as ec','ec.category_id','expenses.category_id')
+                ->select('ec.category_name as category', DB::raw('SUM(amount) AS total_amount'))
+                ->groupBy('category')
+                ->orderBy('category')
+                ->get();
+
+        $expensesbyuseronly = Expense::join('expense_categories as ec','ec.category_id','expenses.category_id')
+        ->where('expenses.created_by',$request->user_id)
+        ->select('ec.category_name as category', DB::raw('SUM(amount) AS total_amount'))
+        ->groupBy('category')
+        ->orderBy('category')
+        ->get();
+
+        if($request->role == 1){
+            return $expensesall;
+        }else{
+            return $expensesbyuseronly;
+        }
+
+        
+
+    }
+
 }

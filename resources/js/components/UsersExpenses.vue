@@ -7,15 +7,16 @@
             </v-toolbar-title>
         </v-toolbar>
         <hr>
+        <v-text-field outlined label="Search" v-model="search" prepend-icon="mdi-magnify"></v-text-field>
         <v-simple-table class="mt-2" dense fixed-header height="400">
             <thead>
                 <tr>
-                    <th style="background-color:#F28DBC;color:white">No.</th>
-                    <th style="background-color:#F28DBC;color:white">Entry Date</th>
-                    <th style="background-color:#F28DBC;color:white">Name</th>
-                    <th style="background-color:#F28DBC;color:white">Expense Category</th>
-                    <th style="background-color:#F28DBC;color:white">Description</th>
-                    <th style="background-color:#F28DBC;color:white">Amount</th>
+                    <th style="background-color:teal;color:white">No.</th>
+                    <th style="background-color:teal;color:white">Entry Date</th>
+                    <th style="background-color:teal;color:white">Name</th>
+                    <th style="background-color:teal;color:white">Expense Category</th>
+                    <th style="background-color:teal;color:white">Description</th>
+                    <th style="background-color:teal;color:white">Amount</th>
                 </tr>
             </thead>
             <tbody>
@@ -48,7 +49,8 @@ import moment from 'moment';
 export default {
     data() {
         return {
-           user_expenses_list:{}
+           user_expenses_list:{},
+           search:''
         }
     },
     created() {

@@ -15,7 +15,8 @@ import App from './views/template/App';
 import store from './store'
 Vue.use(Vuetify)
 import '@mdi/font/css/materialdesignicons.css';
-
+import HighchartsVue from 'highcharts-vue'
+Vue.use(HighchartsVue)
 
 
 

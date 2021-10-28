@@ -23,7 +23,7 @@ var render = function() {
           "span",
           {
             staticClass: "mt-5",
-            staticStyle: { color: "#F28DBC", "font-size": "15px" }
+            staticStyle: { color: "teal", "font-size": "15px" }
           },
           [_vm._v("Expense Management 2021. All Rights Reserved")]
         )
