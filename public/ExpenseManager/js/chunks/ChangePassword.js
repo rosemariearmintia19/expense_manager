@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[10],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["ChangePassword"],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/pages/ChangePassword.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************************!*\
@@ -108,7 +108,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -116,7 +116,7 @@ var render = function() {
     "div",
     {
       staticClass: "container",
-      staticStyle: { position: "relative", top: "10%" }
+      staticStyle: { position: "relative", top: "10%" },
     },
     [
       _c(
@@ -130,7 +130,7 @@ var render = function() {
                 "v-container",
                 {
                   staticClass: "text-xs-center",
-                  staticStyle: { position: "relative", top: "5%" }
+                  staticStyle: { position: "relative", top: "5%" },
                 },
                 [
                   _c(
@@ -143,7 +143,7 @@ var render = function() {
                             "h1",
                             {
                               staticClass: "mt-10 mb-5",
-                              staticStyle: { color: "teal" }
+                              staticStyle: { color: "teal" },
                             },
                             [_vm._v("Reset Password")]
                           ),
@@ -154,12 +154,12 @@ var render = function() {
                               name: "OldPass",
                               outlined: "",
                               rules: [
-                                function() {
+                                function () {
                                   return (
                                     !!_vm.old_password ||
                                     "This field is required"
                                   )
-                                }
+                                },
                               ],
                               "error-messages": _vm.errorMessages,
                               label: "Old Password",
@@ -167,21 +167,21 @@ var render = function() {
                               "append-icon": _vm.show5
                                 ? "mdi-eye"
                                 : "mdi-eye-off",
-                              type: _vm.show5 ? "text" : "password"
+                              type: _vm.show5 ? "text" : "password",
                             },
                             on: {
                               blur: _vm.check_old_password,
-                              "click:append": function($event) {
+                              "click:append": function ($event) {
                                 _vm.show5 = !_vm.show5
-                              }
+                              },
                             },
                             model: {
                               value: _vm.old_password,
-                              callback: function($$v) {
+                              callback: function ($$v) {
                                 _vm.old_password = $$v
                               },
-                              expression: "old_password"
-                            }
+                              expression: "old_password",
+                            },
                           }),
                           _vm._v(" "),
                           _c(
@@ -190,9 +190,9 @@ var render = function() {
                               staticClass: "mt-n6",
                               staticStyle: {
                                 color: "red",
-                                "text-align": "left"
+                                "text-align": "left",
                               },
-                              attrs: { id: "op" }
+                              attrs: { id: "op" },
                             },
                             [_vm._v(_vm._s(_vm.old_alert))]
                           ),
@@ -203,12 +203,12 @@ var render = function() {
                               name: "NewPass",
                               outlined: "",
                               rules: [
-                                function() {
+                                function () {
                                   return (
                                     !!_vm.new_password ||
                                     "This field is required"
                                   )
-                                }
+                                },
                               ],
                               "error-messages": _vm.errorMessages,
                               label: "New Password",
@@ -216,32 +216,32 @@ var render = function() {
                               "append-icon": _vm.show1
                                 ? "mdi-eye"
                                 : "mdi-eye-off",
-                              type: _vm.show1 ? "text" : "password"
+                              type: _vm.show1 ? "text" : "password",
                             },
                             on: {
-                              "click:append": function($event) {
+                              "click:append": function ($event) {
                                 _vm.show1 = !_vm.show1
-                              }
+                              },
                             },
                             model: {
                               value: _vm.new_password,
-                              callback: function($$v) {
+                              callback: function ($$v) {
                                 _vm.new_password = $$v
                               },
-                              expression: "new_password"
-                            }
+                              expression: "new_password",
+                            },
                           }),
                           _vm._v(" "),
                           _c("v-text-field", {
                             attrs: {
                               id: "re_password",
                               rules: [
-                                function() {
+                                function () {
                                   return (
                                     !!_vm.re_password ||
                                     "This field is required"
                                   )
-                                }
+                                },
                               ],
                               "error-messages": _vm.errorMessages,
                               name: "re_password",
@@ -250,21 +250,21 @@ var render = function() {
                               type: _vm.show3 ? "text" : "password",
                               "append-icon": _vm.show3
                                 ? "mdi-eye"
-                                : "mdi-eye-off"
+                                : "mdi-eye-off",
                             },
                             on: {
                               blur: _vm.CheckPassword,
-                              "click:append": function($event) {
+                              "click:append": function ($event) {
                                 _vm.show3 = !_vm.show3
-                              }
+                              },
                             },
                             model: {
                               value: _vm.re_password,
-                              callback: function($$v) {
+                              callback: function ($$v) {
                                 _vm.re_password = $$v
                               },
-                              expression: "re_password"
-                            }
+                              expression: "re_password",
+                            },
                           }),
                           _vm._v(" "),
                           _vm.alert
@@ -274,9 +274,9 @@ var render = function() {
                                   staticClass: "mt-n5",
                                   staticStyle: {
                                     color: "red",
-                                    "text-align": "left"
+                                    "text-align": "left",
                                   },
-                                  attrs: { id: "alert" }
+                                  attrs: { id: "alert" },
                                 },
                                 [_vm._v(_vm._s(_vm.alert))]
                               )
@@ -294,34 +294,34 @@ var render = function() {
                                     primary: "",
                                     large: "",
                                     block: "",
-                                    color: "teal"
+                                    color: "teal",
                                   },
                                   on: {
-                                    click: function($event) {
+                                    click: function ($event) {
                                       return _vm.SaveNewPassword()
-                                    }
-                                  }
+                                    },
+                                  },
                                 },
                                 [_vm._v("Save")]
-                              )
+                              ),
                             ],
                             1
-                          )
+                          ),
                         ],
                         1
-                      )
+                      ),
                     ],
                     1
-                  )
+                  ),
                 ],
                 1
-              )
+              ),
             ],
             1
-          )
+          ),
         ],
         1
-      )
+      ),
     ],
     1
   )

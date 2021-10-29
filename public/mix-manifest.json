@@ -1,4 +1,17 @@
 {
     "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css"
+    "/css/app.css": "/css/app.css",
+    "/ExpenseManager/js/chunks/ChangePassword.js": "/ExpenseManager/js/chunks/ChangePassword.js",
+    "/ExpenseManager/js/chunks/CreateAccount.js": "/ExpenseManager/js/chunks/CreateAccount.js",
+    "/ExpenseManager/js/chunks/ExpenseCategory.js": "/ExpenseManager/js/chunks/ExpenseCategory.js",
+    "/ExpenseManager/js/chunks/ExpenseChart.js": "/ExpenseManager/js/chunks/ExpenseChart.js",
+    "/ExpenseManager/js/chunks/Expenses.js": "/ExpenseManager/js/chunks/Expenses.js",
+    "/ExpenseManager/js/chunks/Footer.js": "/ExpenseManager/js/chunks/Footer.js",
+    "/ExpenseManager/js/chunks/ForgotPassword.js": "/ExpenseManager/js/chunks/ForgotPassword.js",
+    "/ExpenseManager/js/chunks/Home.js": "/ExpenseManager/js/chunks/Home.js",
+    "/ExpenseManager/js/chunks/Login.js": "/ExpenseManager/js/chunks/Login.js",
+    "/ExpenseManager/js/chunks/NavBar.js": "/ExpenseManager/js/chunks/NavBar.js",
+    "/ExpenseManager/js/chunks/UserRoles.js": "/ExpenseManager/js/chunks/UserRoles.js",
+    "/ExpenseManager/js/chunks/Users.js": "/ExpenseManager/js/chunks/Users.js",
+    "/ExpenseManager/js/chunks/vendors~ExpenseCategory~Expenses~UserRoles~Users.js": "/ExpenseManager/js/chunks/vendors~ExpenseCategory~Expenses~UserRoles~Users.js"
 }

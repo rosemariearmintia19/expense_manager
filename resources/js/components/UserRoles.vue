@@ -5,11 +5,6 @@
             <v-toolbar-title class="dark--text mt-10" style="font-family:Trebuchet MS">
                 Permission Type
             </v-toolbar-title>
-            <template v-slot:extension>
-                <v-btn fab color="teal" class="white--text" bottom right absolute @click="dialog = !dialog">
-                    <v-icon>mdi-plus</v-icon>
-                </v-btn>
-            </template>
         </v-toolbar>
         <hr>
         <v-simple-table class="mt-2" dense fixed-header height="400">
@@ -17,43 +12,35 @@
                 <tr>
                     <th style="background-color:teal;color:white">No.</th>
                     <th style="background-color:teal;color:white">Name</th>
-                    <th style="background-color:teal;color:white">Status</th>
-                    <th style="background-color:teal;color:white">Actions</th>
+                    <th style="background-color:teal;color:white">Description</th>
+                    <th style="background-color:teal;color:white">Creted at</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="list in permission_lists" :key="list.role_id">
                     <td>{{list.role_id}}.</td>
-                    <td>
-                        <span v-show="!list.edit">{{list.name}}</span>
-                        <v-text-field v-show="list.edit" dense v-model="list.name"></v-text-field>
+                    <td v-if="list.role_id == 1">
+                        <span>{{list.name}}</span>
+                    </td>
+                    <td v-else>
+                        <span class="aa" @click="UpdateRole(list)">{{list.name}}</span>
                     </td>
                     <td>
-                        <v-chip x-small :color="getColor(list.deleted_at)" dark dense>
-                            {{ list.deleted_at}}
-                        </v-chip>
+                        <span>{{list.description}}</span>
                     </td>
                     <td>
-                        <v-btn icon dense x-small v-if="!list.edit" @click="edit_permission(list.role_id)">
-                            <v-icon>mdi-pencil</v-icon>
-                        </v-btn>
-                        <v-btn icon dense x-small v-else @click="save_edit_permission(list)">
-                            <v-icon>mdi-content-save</v-icon>
-                        </v-btn>
-                        <v-icon small v-if="list.deleted_at == 'Deleted'" @click="restore_permission(list)">
-                            mdi-restore
-                        </v-icon>
-                        <v-btn icon x-small v-if="list.deleted_at == 'Active'" @click="delete_permission(list)">
-                            <v-icon dense>mdi-delete</v-icon>
-                        </v-btn>
+                        <span>{{list.created_at}}</span>
                     </td>
                 </tr>
             </tbody>
         </v-simple-table>
     </v-card>
+    <v-btn color="teal" class="white--text" bottom right absolute @click="dialog = !dialog">
+        Add Role
+    </v-btn>
     <v-dialog v-model="dialog" max-width="400px">
         <v-card>
-            <v-card-title>
+            <v-card-title style="background-color:teal;color:white">
                 <span class="headline">{{ formTitle }}</span>
             </v-card-title>
 
@@ -61,7 +48,8 @@
                 <v-container>
                     <v-row>
                         <v-col>
-                            <v-text-field v-model="permission_type" label="Permission Name" outlined dense></v-text-field>
+                            <v-text-field v-model="permission_type" label="Display Name" outlined dense></v-text-field>
+                            <v-text-field v-model="description" label="Description" outlined dense></v-text-field>
                         </v-col>
                     </v-row>
                 </v-container>
@@ -78,25 +66,34 @@
             </v-card-actions>
         </v-card>
     </v-dialog>
-    <v-dialog v-model="dialogDelete" max-width="280px">
+    <v-dialog v-model="UpdateDialog" max-width="400px">
         <v-card>
-            <v-card-title align="center">Are you sure you want to delete this process?</v-card-title>
+            <v-card-title style="background-color:teal;color:white">
+                <span class="headline">Update Role</span>
+            </v-card-title>
+
+            <v-card-text>
+                <v-container>
+                    <v-row>
+                        <v-col>
+                            <v-text-field v-model="edit_display_name" label="Display Name" outlined dense>{{edit_display_name}}</v-text-field>
+                            <v-text-field v-model="edit_description" label="Description" outlined dense>{{edit_description}}</v-text-field>
+                        </v-col>
+                    </v-row>
+                </v-container>
+            </v-card-text>
+
             <v-card-actions>
+                <v-btn color="teal darken-1" text @click="delete_role(role_id)">
+                    Delete
+                </v-btn>
                 <v-spacer></v-spacer>
-                <v-btn color="teal darken-1" text @click="closeDelete">Cancel</v-btn>
-                <v-btn color="teal darken-1" text @click="deletePermissionConfirm">OK</v-btn>
-                <v-spacer></v-spacer>
-            </v-card-actions>
-        </v-card>
-    </v-dialog>
-    <v-dialog v-model="dialogRestore" max-width="280px">
-        <v-card>
-            <v-card-title align="center">Are you sure you want to retrieve this process?</v-card-title>
-            <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="teal darken-1" text @click="closeRestore">Cancel</v-btn>
-                <v-btn color="teal darken-1" text @click="restorePermissionConfirm">OK</v-btn>
-                <v-spacer></v-spacer>
+                <v-btn color="teal darken-1" text @click="closeEdit">
+                    Cancel
+                </v-btn>
+                <v-btn color="teal darken-1" text @click="save_edit_role(role_id)">
+                    Update
+                </v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
@@ -104,6 +101,7 @@
 </template>
 
 <script>
+import moment from 'moment/moment'
 export default {
     data() {
         return {
@@ -112,7 +110,12 @@ export default {
             dialogRestore: false,
             editedIndex: -1,
             permission_type: null,
+            description: null,
             permission_lists: {},
+            UpdateDialog: false,
+            role_id: '',
+            edit_display_name: null,
+            edit_description: null
         }
     },
 
@@ -128,77 +131,43 @@ export default {
         dialog(val) {
             val || this.close()
         },
-        dialogDelete(val) {
-            val || this.closeDelete()
-        },
     },
     methods: {
-        save_edit_permission(permission) {
+        delete_role(role_id) {
+            if (confirm("Do you really want to delete?")) {
+                this.user = JSON.parse(localStorage.getItem('user'))
+                axios.post('api/DeletePermission', {
+                    user_id: this.user.id,
+                    role_id: role_id
+                }).then(res => {
+                    this.permission_table()
+                })
+            }
+        },
+        save_edit_role(role_id) {
             this.user = JSON.parse(localStorage.getItem('user'))
             axios.post('api/SaveEditPermission', {
                 user_id: this.user.id,
-                role_id:permission.role_id,
-                name: permission.name
+                role_id: role_id,
+                name: this.edit_display_name,
+                description: this.edit_description
             }).then(res => {
                 this.permission_table()
+                this.UpdateDialog = false
             })
         },
-        edit_permission(role_id) {
-            for (let x = 0; x < this.permission_lists.length; x++) {
-                if (role_id == this.permission_lists[x].role_id) {
-                    if (this.permission_lists[x].edit) {
-                        this.permission_lists[x].edit = false
-                    } else {
-                        this.permission_lists[x].edit = true
-                    }
-                }
-                console.log(this.permission_lists)
-            }
-
-        },
-        getColor(deleted_at) {
-            if (deleted_at == 'Active') return 'green'
-            else return 'red'
-        },
-        deletePermissionConfirm() {
-            this.user = JSON.parse(localStorage.getItem('user'))
-            axios.post('api/DeletePermission', {
-                user_id: this.user.id,
-                role_id: this.permission_list.role_id
-            }).then(res => {
-                this.permission_table()
-                this.closeDelete()
-            })
-        },
-        delete_permission(list) {
-            this.dialogDelete = true
-            this.permission_list = list
-        },
-        restore_permission(list) {
-            this.dialogRestore = true
-            this.permission_list = list
-        },
-        restorePermissionConfirm() {
-            this.user = JSON.parse(localStorage.getItem('user'))
-            axios.post('api/RestorePermission', {
-                user_id: this.user.id,
-                role_id: this.permission_list.role_id
-            }).then(res => {
-                this.permission_table()
-                this.closeRestore()
-            })
+        UpdateRole(list) {
+            this.UpdateDialog = true
+            this.role_id = list.role_id
+            this.edit_display_name = list.name
+            this.edit_description = list.description
         },
         permission_table() {
             axios.get('api/Permission')
                 .then(res => {
                     this.permission_lists = res.data
                     for (var i = 0; i < this.permission_lists.length; i++) {
-                        this.$set(this.permission_lists[i], 'edit', false)
-                        if (this.permission_lists[i].deleted_at) {
-                            this.permission_lists[i].deleted_at = 'Deleted';
-                        } else {
-                            this.permission_lists[i].deleted_at = 'Active';
-                        }
+                        this.permission_lists[i].created_at = moment(res.data[i].created_at).format('YYYY-MM-DD')
                     }
                 })
         },
@@ -206,7 +175,8 @@ export default {
             this.user = JSON.parse(localStorage.getItem('user'))
             axios.post('api/Permission', {
                 user_id: this.user.id,
-                permission_type: this.permission_type
+                permission_type: this.permission_type,
+                description: this.description
             }).then(res => {
                 this.dialog = false
                 this.permission_table()
@@ -216,23 +186,15 @@ export default {
                 }
             )
         },
+        closeEdit() {
+            this.UpdateDialog = false
+            this.$nextTick(() => {
+                this.editedItem = Object.assign({}, this.defaultItem)
+                this.editedIndex = -1
+            })
+        },
         close() {
             this.dialog = false
-            this.$nextTick(() => {
-                this.editedItem = Object.assign({}, this.defaultItem)
-                this.editedIndex = -1
-            })
-        },
-
-        closeDelete() {
-            this.dialogDelete = false
-            this.$nextTick(() => {
-                this.editedItem = Object.assign({}, this.defaultItem)
-                this.editedIndex = -1
-            })
-        },
-        closeRestore() {
-            this.dialogRestore = false
             this.$nextTick(() => {
                 this.editedItem = Object.assign({}, this.defaultItem)
                 this.editedIndex = -1
@@ -247,5 +209,11 @@ export default {
 .v-data-table>.v-data-table__wrapper>table>thead>tr>th {
     font-size: 12px !important;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+}
+
+.aa:hover {
+    cursor: pointer;
+    color: teal
 }
 </style>

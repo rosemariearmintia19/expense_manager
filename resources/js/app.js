@@ -6,13 +6,15 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+// window.Vue = require('vue');
 
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 import Routes from './routes'
 import App from './views/template/App';
 import store from './store'
+import Vuex from 'vuex';
+Vue.use(Vuex)
 Vue.use(Vuetify)
 import '@mdi/font/css/materialdesignicons.css';
 import HighchartsVue from 'highcharts-vue'
@@ -32,7 +34,6 @@ Vue.use(HighchartsVue)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('chart-component', require('./components/ExpenseChart.vue'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -44,6 +45,9 @@ const app = new Vue({
     el: '#app',
     store,
     vuetify : new Vuetify,
-    router : Routes,
-    render: h=>h(App)
+    router:Routes,
+    render: h=>h(App),
+    created(){
+        console.log($('div'))
+    }
 });

@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[3],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["Expenses"],{
 
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Expenses.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************!*\
@@ -133,6 +133,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -145,7 +159,14 @@ __webpack_require__.r(__webpack_exports__);
       description: null,
       expense_categories: [],
       expense_category: null,
-      amount: null
+      amount: null,
+      entry_date: new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().substr(0, 10),
+      menu: false,
+      edit_menu: false,
+      UpdateExpenseDialog: false,
+      edit_category: null,
+      edit_amount: null,
+      edit_entry_date: null
     };
   },
   computed: {
@@ -166,140 +187,99 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    restoreExpenseConfirm: function restoreExpenseConfirm() {
+    delete_expense: function delete_expense(expense_id) {
       var _this = this;
 
-      this.user = JSON.parse(localStorage.getItem('user'));
-      axios.post('api/RestoreExpenses', {
-        user_id: this.user.id,
-        expense_id: this.expense_lists.expense_id
-      }).then(function (res) {
-        _this.get_expenses();
+      if (confirm("Do you really want to delete?")) {
+        this.user = JSON.parse(localStorage.getItem('user'));
+        axios.post('api/DeleteExpenses', {
+          updated_by: this.user.id,
+          expense_id: expense_id
+        }).then(function (res) {
+          _this.get_expenses();
 
-        _this.closeRestore();
-      });
+          _this.UpdateExpenseDialog = false;
+        });
+      }
     },
-    restore_expenses: function restore_expenses(list) {
-      this.dialogRestore = true;
-      this.expense_lists = list;
-    },
-    deleteExpenseConfirm: function deleteExpenseConfirm() {
+    save_edit_expense: function save_edit_expense(expense_id) {
       var _this2 = this;
 
       this.user = JSON.parse(localStorage.getItem('user'));
-      axios.post('api/DeleteExpenses', {
-        user_id: this.user.id,
-        expense_id: this.expense_lists.expense_id
+      axios.post('api/SaveEditExpenses', {
+        update_by: this.user.id,
+        expense_id: expense_id,
+        category_name: this.edit_category,
+        amount: this.edit_amount,
+        entry_date: this.edit_entry_date
       }).then(function (res) {
         _this2.get_expenses();
 
-        _this2.closeDelete();
+        _this2.UpdateExpenseDialog = false;
       });
     },
-    delete_expenses: function delete_expenses(list) {
-      this.dialogDelete = true;
-      this.expense_lists = list;
-    },
-    save_edit_expenses: function save_edit_expenses(expenses) {
-      var _this3 = this;
-
-      this.user = JSON.parse(localStorage.getItem('user'));
-      axios.post('api/SaveEditExpenses', {
-        user_id: this.user.id,
-        expense_id: expenses.expense_id,
-        description: expenses.description,
-        amount: expenses.amount
-      }).then(function (res) {
-        _this3.get_expenses();
-      });
-    },
-    edit_expenses: function edit_expenses(expense_id) {
-      for (var x = 0; x < this.expense_list.length; x++) {
-        if (expense_id == this.expense_list[x].expense_id) {
-          if (this.expense_list[x].edit) {
-            this.expense_list[x].edit = false;
-          } else {
-            this.expense_list[x].edit = true;
-          }
-        }
-
-        console.log(this.expense_list);
-      }
-    },
-    getColor: function getColor(deleted_at) {
-      if (deleted_at == 'Active') return 'green';else return 'red';
+    UpdateExpense: function UpdateExpense(list) {
+      this.UpdateExpenseDialog = true;
+      this.expense_id = list.expense_id;
+      this.edit_category = list.category_name;
+      this.edit_amount = list.amount;
+      this.edit_entry_date = list.entry_date;
     },
     get_expenses: function get_expenses() {
-      var _this4 = this;
+      var _this3 = this;
 
       this.user = JSON.parse(localStorage.getItem('user'));
       axios.post('api/GetExpenses', {
         user_id: this.user.id
       }).then(function (res) {
         console.log(res.data);
-        _this4.expense_list = res.data;
+        _this3.expense_list = res.data;
 
-        for (var i = 0; i < _this4.expense_list.length; i++) {
-          _this4.$set(_this4.expense_list[i], 'edit', false);
-
-          if (_this4.expense_list[i].deleted_at) {
-            _this4.expense_list[i].deleted_at = 'Deleted';
-          } else {
-            _this4.expense_list[i].deleted_at = 'Active';
-          }
-
-          _this4.expense_list[i].created_at = moment__WEBPACK_IMPORTED_MODULE_0___default()(res.data[i].created_at).format('YYYY-MM-DD');
+        for (var i = 0; i < _this3.expense_list.length; i++) {
+          _this3.expense_list[i].entry_date = moment__WEBPACK_IMPORTED_MODULE_0___default()(res.data[i].entry_date).format('YYYY-MM-DD');
+          _this3.expense_list[i].created_at = moment__WEBPACK_IMPORTED_MODULE_0___default()(res.data[i].created_at).format('YYYY-MM-DD');
         }
       });
     },
     save_new_expenses: function save_new_expenses() {
-      var _this5 = this;
+      var _this4 = this;
 
       this.user = JSON.parse(localStorage.getItem('user'));
       axios.post('api/Expenses', {
         user_id: this.user.id,
         expense_category: this.expense_category,
-        description: this.description,
-        amount: this.amount
+        amount: this.amount,
+        entry_date: this.entry_date
       }).then(function (res) {
-        _this5.dialog = false;
+        _this4.dialog = false;
 
-        _this5.get_expenses();
+        _this4.get_expenses();
       });
     },
     get_categories: function get_categories() {
-      var _this6 = this;
+      var _this5 = this;
 
       axios.get('api/GetCategory').then(function (res) {
-        _this6.expense_categories = res.data;
+        _this5.expense_categories = res.data;
         console.log(res.data);
       });
     },
     close: function close() {
-      var _this7 = this;
+      var _this6 = this;
 
       this.dialog = false;
       this.$nextTick(function () {
+        _this6.editedItem = Object.assign({}, _this6.defaultItem);
+        _this6.editedIndex = -1;
+      });
+    },
+    closeEdit: function closeEdit() {
+      var _this7 = this;
+
+      this.UpdateExpenseDialog = false;
+      this.$nextTick(function () {
         _this7.editedItem = Object.assign({}, _this7.defaultItem);
         _this7.editedIndex = -1;
-      });
-    },
-    closeDelete: function closeDelete() {
-      var _this8 = this;
-
-      this.dialogDelete = false;
-      this.$nextTick(function () {
-        _this8.editedItem = Object.assign({}, _this8.defaultItem);
-        _this8.editedIndex = -1;
-      });
-    },
-    closeRestore: function closeRestore() {
-      var _this9 = this;
-
-      this.dialogRestore = false;
-      this.$nextTick(function () {
-        _this9.editedItem = Object.assign({}, _this9.defaultItem);
-        _this9.editedIndex = -1;
       });
     }
   }
@@ -319,7 +299,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.v-data-table>.v-data-table__wrapper>table>tbody>tr>td,\r\n.v-data-table>.v-data-table__wrapper>table>thead>tr>th {\r\n    font-size: 12px !important;\r\n    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\n}\r\n", ""]);
+exports.push([module.i, "\n.v-data-table>.v-data-table__wrapper>table>tbody>tr>td,\r\n.v-data-table>.v-data-table__wrapper>table>thead>tr>th {\r\n    font-size: 12px !important;\r\n    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;\n}\n.aa:hover {\r\n    cursor: pointer;\r\n    color: teal\n}\r\n", ""]);
 
 // exports
 
@@ -669,7 +649,7 @@ if(false) {}
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -679,48 +659,16 @@ var render = function() {
     [
       _c(
         "v-toolbar",
-        {
-          attrs: { light: "", extended: "", height: "4" },
-          scopedSlots: _vm._u([
-            {
-              key: "extension",
-              fn: function() {
-                return [
-                  _c(
-                    "v-btn",
-                    {
-                      staticClass: "white--text",
-                      attrs: {
-                        fab: "",
-                        color: "teal",
-                        bottom: "",
-                        right: "",
-                        absolute: ""
-                      },
-                      on: {
-                        click: function($event) {
-                          _vm.dialog = !_vm.dialog
-                        }
-                      }
-                    },
-                    [_c("v-icon", [_vm._v("mdi-plus")])],
-                    1
-                  )
-                ]
-              },
-              proxy: true
-            }
-          ])
-        },
+        { attrs: { light: "", extended: "", height: "4" } },
         [
           _c(
             "v-toolbar-title",
             {
               staticClass: "dark--text mt-10",
-              staticStyle: { "font-family": "Trebuchet MS" }
+              staticStyle: { "font-family": "Trebuchet MS" },
             },
-            [_vm._v("\r\n            My Expenses\r\n        ")]
-          )
+            [_vm._v("\r\n            Expenses\r\n        ")]
+          ),
         ],
         1
       ),
@@ -734,7 +682,7 @@ var render = function() {
             "v-simple-table",
             {
               staticClass: "mt-2",
-              attrs: { dense: "", "fixed-header": "", height: "400" }
+              attrs: { dense: "", "fixed-header": "", height: "400" },
             },
             [
               _c("thead", [
@@ -744,8 +692,8 @@ var render = function() {
                     {
                       staticStyle: {
                         "background-color": "teal",
-                        color: "white"
-                      }
+                        color: "white",
+                      },
                     },
                     [_vm._v("No.")]
                   ),
@@ -755,19 +703,8 @@ var render = function() {
                     {
                       staticStyle: {
                         "background-color": "teal",
-                        color: "white"
-                      }
-                    },
-                    [_vm._v("Entry Date")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "th",
-                    {
-                      staticStyle: {
-                        "background-color": "teal",
-                        color: "white"
-                      }
+                        color: "white",
+                      },
                     },
                     [_vm._v("Expense Category")]
                   ),
@@ -777,19 +714,8 @@ var render = function() {
                     {
                       staticStyle: {
                         "background-color": "teal",
-                        color: "white"
-                      }
-                    },
-                    [_vm._v("Description")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "th",
-                    {
-                      staticStyle: {
-                        "background-color": "teal",
-                        color: "white"
-                      }
+                        color: "white",
+                      },
                     },
                     [_vm._v("Amount")]
                   ),
@@ -799,10 +725,10 @@ var render = function() {
                     {
                       staticStyle: {
                         "background-color": "teal",
-                        color: "white"
-                      }
+                        color: "white",
+                      },
                     },
-                    [_vm._v("Status")]
+                    [_vm._v("Entry Date")]
                   ),
                   _vm._v(" "),
                   _c(
@@ -810,17 +736,17 @@ var render = function() {
                     {
                       staticStyle: {
                         "background-color": "teal",
-                        color: "white"
-                      }
+                        color: "white",
+                      },
                     },
-                    [_vm._v("Actions")]
-                  )
-                ])
+                    [_vm._v("Created At")]
+                  ),
+                ]),
               ]),
               _vm._v(" "),
               _c(
                 "tbody",
-                _vm._l(_vm.expense_list, function(list) {
+                _vm._l(_vm.expense_list, function (list) {
                   return _c("tr", { key: list.expense_id }, [
                     _c("td", [_vm._v(_vm._s(list.expense_id) + ".")]),
                     _vm._v(" "),
@@ -828,267 +754,78 @@ var render = function() {
                       "td",
                       [
                         _c(
-                          "span",
+                          "v-tooltip",
                           {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: !list.edit,
-                                expression: "!list.edit"
-                              }
-                            ]
-                          },
-                          [_vm._v(_vm._s(list.created_at))]
-                        ),
-                        _vm._v(" "),
-                        _c("v-text-field", {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: list.edit,
-                              expression: "list.edit"
-                            }
-                          ],
-                          attrs: { dense: "" },
-                          model: {
-                            value: list.created_at,
-                            callback: function($$v) {
-                              _vm.$set(list, "created_at", $$v)
-                            },
-                            expression: "list.created_at"
-                          }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      [
-                        _c(
-                          "span",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: !list.edit,
-                                expression: "!list.edit"
-                              }
-                            ]
-                          },
-                          [_vm._v(_vm._s(list.category_name))]
-                        ),
-                        _vm._v(" "),
-                        _c("v-text-field", {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: list.edit,
-                              expression: "list.edit"
-                            }
-                          ],
-                          attrs: { dense: "" },
-                          model: {
-                            value: list.category_name,
-                            callback: function($$v) {
-                              _vm.$set(list, "category_name", $$v)
-                            },
-                            expression: "list.category_name"
-                          }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      [
-                        _c(
-                          "span",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: !list.edit,
-                                expression: "!list.edit"
-                              }
-                            ]
-                          },
-                          [_vm._v(_vm._s(list.description))]
-                        ),
-                        _vm._v(" "),
-                        _c("v-text-field", {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: list.edit,
-                              expression: "list.edit"
-                            }
-                          ],
-                          attrs: { dense: "" },
-                          model: {
-                            value: list.description,
-                            callback: function($$v) {
-                              _vm.$set(list, "description", $$v)
-                            },
-                            expression: "list.description"
-                          }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      [
-                        _c(
-                          "span",
-                          {
-                            directives: [
-                              {
-                                name: "show",
-                                rawName: "v-show",
-                                value: !list.edit,
-                                expression: "!list.edit"
-                              }
-                            ]
-                          },
-                          [_vm._v(_vm._s(list.amount))]
-                        ),
-                        _vm._v(" "),
-                        _c("v-text-field", {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: list.edit,
-                              expression: "list.edit"
-                            }
-                          ],
-                          attrs: { dense: "" },
-                          model: {
-                            value: list.amount,
-                            callback: function($$v) {
-                              _vm.$set(list, "amount", $$v)
-                            },
-                            expression: "list.amount"
-                          }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      [
-                        _c(
-                          "v-chip",
-                          {
-                            attrs: {
-                              "x-small": "",
-                              color: _vm.getColor(list.deleted_at),
-                              dark: "",
-                              dense: ""
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\r\n                            " +
-                                _vm._s(list.deleted_at) +
-                                "\r\n                        "
-                            )
-                          ]
-                        )
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      [
-                        !list.edit
-                          ? _c(
-                              "v-btn",
-                              {
-                                attrs: { icon: "", dense: "", "x-small": "" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.edit_expenses(list.expense_id)
-                                  }
-                                }
-                              },
-                              [_c("v-icon", [_vm._v("mdi-pencil")])],
-                              1
-                            )
-                          : _c(
-                              "v-btn",
-                              {
-                                attrs: { icon: "", dense: "", "x-small": "" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.save_edit_expenses(list)
-                                  }
-                                }
-                              },
-                              [_c("v-icon", [_vm._v("mdi-content-save")])],
-                              1
-                            ),
-                        _vm._v(" "),
-                        list.deleted_at == "Deleted"
-                          ? _c(
-                              "v-icon",
-                              {
-                                attrs: { small: "" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.restore_expenses(list)
-                                  }
-                                }
-                              },
+                            attrs: { bottom: "" },
+                            scopedSlots: _vm._u(
                               [
-                                _vm._v(
-                                  "\r\n                            mdi-restore\r\n                        "
-                                )
-                              ]
-                            )
-                          : _vm._e(),
-                        _vm._v(" "),
-                        list.deleted_at == "Active"
-                          ? _c(
-                              "v-btn",
-                              {
-                                attrs: { icon: "", "x-small": "" },
-                                on: {
-                                  click: function($event) {
-                                    return _vm.delete_expenses(list)
-                                  }
-                                }
-                              },
-                              [
-                                _c("v-icon", { attrs: { dense: "" } }, [
-                                  _vm._v("mdi-delete")
-                                ])
+                                {
+                                  key: "activator",
+                                  fn: function (ref) {
+                                    var on = ref.on
+                                    var attrs = ref.attrs
+                                    return [
+                                      _c(
+                                        "span",
+                                        _vm._g(
+                                          _vm._b(
+                                            {
+                                              staticClass: "aa",
+                                              on: {
+                                                click: function ($event) {
+                                                  return _vm.UpdateExpense(list)
+                                                },
+                                              },
+                                            },
+                                            "span",
+                                            attrs,
+                                            false
+                                          ),
+                                          on
+                                        ),
+                                        [_vm._v(_vm._s(list.category_name))]
+                                      ),
+                                    ]
+                                  },
+                                },
                               ],
-                              1
-                            )
-                          : _vm._e()
+                              null,
+                              true
+                            ),
+                          },
+                          [_vm._v(" "), _c("span", [_vm._v("Update")])]
+                        ),
                       ],
                       1
-                    )
+                    ),
+                    _vm._v(" "),
+                    _c("td", [_c("span", [_vm._v(_vm._s(list.amount))])]),
+                    _vm._v(" "),
+                    _c("td", [_c("span", [_vm._v(_vm._s(list.entry_date))])]),
+                    _vm._v(" "),
+                    _c("td", [_c("span", [_vm._v(_vm._s(list.created_at))])]),
                   ])
                 }),
                 0
-              )
+              ),
             ]
-          )
+          ),
         ],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-btn",
+        {
+          staticClass: "white--text mt-10",
+          attrs: { color: "teal", bottom: "", right: "", absolute: "" },
+          on: {
+            click: function ($event) {
+              _vm.dialog = !_vm.dialog
+            },
+          },
+        },
+        [_vm._v("\r\n        Add Expenses\r\n    ")]
       ),
       _vm._v(" "),
       _c(
@@ -1097,11 +834,11 @@ var render = function() {
           attrs: { "max-width": "400px" },
           model: {
             value: _vm.dialog,
-            callback: function($$v) {
+            callback: function ($$v) {
               _vm.dialog = $$v
             },
-            expression: "dialog"
-          }
+            expression: "dialog",
+          },
         },
         [
           _c(
@@ -1109,8 +846,8 @@ var render = function() {
             [
               _c("v-card-title", [
                 _c("span", { staticClass: "headline" }, [
-                  _vm._v(_vm._s(_vm.formTitle))
-                ])
+                  _vm._v(_vm._s(_vm.formTitle)),
+                ]),
               ]),
               _vm._v(" "),
               _c(
@@ -1132,55 +869,163 @@ var render = function() {
                                   "item-value": "category_id",
                                   "item-text": "category_name",
                                   outlined: "",
-                                  dense: ""
+                                  dense: "",
                                 },
                                 model: {
                                   value: _vm.expense_category,
-                                  callback: function($$v) {
+                                  callback: function ($$v) {
                                     _vm.expense_category = $$v
                                   },
-                                  expression: "expense_category"
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c("v-text-field", {
-                                attrs: {
-                                  label: "Description",
-                                  outlined: "",
-                                  dense: ""
+                                  expression: "expense_category",
                                 },
-                                model: {
-                                  value: _vm.description,
-                                  callback: function($$v) {
-                                    _vm.description = $$v
-                                  },
-                                  expression: "description"
-                                }
                               }),
                               _vm._v(" "),
                               _c("v-text-field", {
                                 attrs: {
                                   label: "Amount",
                                   outlined: "",
-                                  dense: ""
+                                  dense: "",
                                 },
                                 model: {
                                   value: _vm.amount,
-                                  callback: function($$v) {
+                                  callback: function ($$v) {
                                     _vm.amount = $$v
                                   },
-                                  expression: "amount"
-                                }
-                              })
+                                  expression: "amount",
+                                },
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "v-menu",
+                                {
+                                  ref: "menu",
+                                  attrs: {
+                                    "close-on-content-click": false,
+                                    "return-value": _vm.entry_date,
+                                    transition: "scale-transition",
+                                    "offset-y": "",
+                                    "min-width": "auto",
+                                  },
+                                  on: {
+                                    "update:returnValue": function ($event) {
+                                      _vm.entry_date = $event
+                                    },
+                                    "update:return-value": function ($event) {
+                                      _vm.entry_date = $event
+                                    },
+                                  },
+                                  scopedSlots: _vm._u([
+                                    {
+                                      key: "activator",
+                                      fn: function (ref) {
+                                        var on = ref.on
+                                        var attrs = ref.attrs
+                                        return [
+                                          _c(
+                                            "v-text-field",
+                                            _vm._g(
+                                              _vm._b(
+                                                {
+                                                  attrs: {
+                                                    label: "Entry Date",
+                                                    "append-icon":
+                                                      "mdi-calendar",
+                                                    readonly: "",
+                                                  },
+                                                  model: {
+                                                    value: _vm.entry_date,
+                                                    callback: function ($$v) {
+                                                      _vm.entry_date = $$v
+                                                    },
+                                                    expression: "entry_date",
+                                                  },
+                                                },
+                                                "v-text-field",
+                                                attrs,
+                                                false
+                                              ),
+                                              on
+                                            )
+                                          ),
+                                        ]
+                                      },
+                                    },
+                                  ]),
+                                  model: {
+                                    value: _vm.menu,
+                                    callback: function ($$v) {
+                                      _vm.menu = $$v
+                                    },
+                                    expression: "menu",
+                                  },
+                                },
+                                [
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-date-picker",
+                                    {
+                                      attrs: { "no-title": "", scrollable: "" },
+                                      model: {
+                                        value: _vm.entry_date,
+                                        callback: function ($$v) {
+                                          _vm.entry_date = $$v
+                                        },
+                                        expression: "entry_date",
+                                      },
+                                    },
+                                    [
+                                      _c("v-spacer"),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: { text: "", color: "primary" },
+                                          on: {
+                                            click: function ($event) {
+                                              _vm.menu = false
+                                            },
+                                          },
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\r\n                                        Cancel\r\n                                    "
+                                          ),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: { text: "", color: "primary" },
+                                          on: {
+                                            click: function ($event) {
+                                              return _vm.$refs.menu.save(
+                                                _vm.entry_date
+                                              )
+                                            },
+                                          },
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\r\n                                        OK\r\n                                    "
+                                          ),
+                                        ]
+                                      ),
+                                    ],
+                                    1
+                                  ),
+                                ],
+                                1
+                              ),
                             ],
                             1
-                          )
+                          ),
                         ],
                         1
-                      )
+                      ),
                     ],
                     1
-                  )
+                  ),
                 ],
                 1
               ),
@@ -1194,12 +1039,12 @@ var render = function() {
                     "v-btn",
                     {
                       attrs: { color: "teal darken-1", text: "" },
-                      on: { click: _vm.close }
+                      on: { click: _vm.close },
                     },
                     [
                       _vm._v(
                         "\r\n                    Cancel\r\n                "
-                      )
+                      ),
                     ]
                   ),
                   _vm._v(" "),
@@ -1207,16 +1052,16 @@ var render = function() {
                     "v-btn",
                     {
                       attrs: { color: "teal darken-1", text: "" },
-                      on: { click: _vm.save_new_expenses }
+                      on: { click: _vm.save_new_expenses },
                     },
                     [_vm._v("\r\n                    Save\r\n                ")]
-                  )
+                  ),
                 ],
                 1
-              )
+              ),
             ],
             1
-          )
+          ),
         ],
         1
       ),
@@ -1224,110 +1069,274 @@ var render = function() {
       _c(
         "v-dialog",
         {
-          attrs: { "max-width": "280px" },
+          attrs: { "max-width": "400px" },
           model: {
-            value: _vm.dialogDelete,
-            callback: function($$v) {
-              _vm.dialogDelete = $$v
+            value: _vm.UpdateExpenseDialog,
+            callback: function ($$v) {
+              _vm.UpdateExpenseDialog = $$v
             },
-            expression: "dialogDelete"
-          }
+            expression: "UpdateExpenseDialog",
+          },
         },
         [
           _c(
             "v-card",
             [
-              _c("v-card-title", { attrs: { align: "center" } }, [
-                _vm._v("Are you sure you want to delete this process?")
-              ]),
+              _c(
+                "v-card-title",
+                { staticStyle: { "background-color": "teal", color: "white" } },
+                [
+                  _c("span", { staticClass: "headline" }, [
+                    _vm._v("Update Category"),
+                  ]),
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "v-card-text",
+                [
+                  _c(
+                    "v-container",
+                    [
+                      _c(
+                        "v-row",
+                        [
+                          _c(
+                            "v-col",
+                            [
+                              _c(
+                                "v-select",
+                                {
+                                  attrs: {
+                                    label: "Expense Category",
+                                    items: _vm.expense_categories,
+                                    "item-value": "category_id",
+                                    "item-text": "category_name",
+                                    outlined: "",
+                                    dense: "",
+                                  },
+                                  model: {
+                                    value: _vm.edit_category,
+                                    callback: function ($$v) {
+                                      _vm.edit_category = $$v
+                                    },
+                                    expression: "edit_category",
+                                  },
+                                },
+                                [_vm._v(_vm._s(_vm.edit_category))]
+                              ),
+                              _vm._v(" "),
+                              _c("v-text-field", {
+                                attrs: {
+                                  label: "Amount",
+                                  outlined: "",
+                                  dense: "",
+                                },
+                                model: {
+                                  value: _vm.edit_amount,
+                                  callback: function ($$v) {
+                                    _vm.edit_amount = $$v
+                                  },
+                                  expression: "edit_amount",
+                                },
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "v-menu",
+                                {
+                                  ref: "edit_menu",
+                                  attrs: {
+                                    "close-on-content-click": false,
+                                    "return-value": _vm.edit_entry_date,
+                                    transition: "scale-transition",
+                                    "offset-y": "",
+                                    "min-width": "auto",
+                                  },
+                                  on: {
+                                    "update:returnValue": function ($event) {
+                                      _vm.edit_entry_date = $event
+                                    },
+                                    "update:return-value": function ($event) {
+                                      _vm.edit_entry_date = $event
+                                    },
+                                  },
+                                  scopedSlots: _vm._u([
+                                    {
+                                      key: "activator",
+                                      fn: function (ref) {
+                                        var on = ref.on
+                                        var attrs = ref.attrs
+                                        return [
+                                          _c(
+                                            "v-text-field",
+                                            _vm._g(
+                                              _vm._b(
+                                                {
+                                                  attrs: {
+                                                    label: "Entry Date",
+                                                    "append-icon":
+                                                      "mdi-calendar",
+                                                    readonly: "",
+                                                  },
+                                                  model: {
+                                                    value: _vm.edit_entry_date,
+                                                    callback: function ($$v) {
+                                                      _vm.edit_entry_date = $$v
+                                                    },
+                                                    expression:
+                                                      "edit_entry_date",
+                                                  },
+                                                },
+                                                "v-text-field",
+                                                attrs,
+                                                false
+                                              ),
+                                              on
+                                            )
+                                          ),
+                                        ]
+                                      },
+                                    },
+                                  ]),
+                                  model: {
+                                    value: _vm.edit_menu,
+                                    callback: function ($$v) {
+                                      _vm.edit_menu = $$v
+                                    },
+                                    expression: "edit_menu",
+                                  },
+                                },
+                                [
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-date-picker",
+                                    {
+                                      attrs: { "no-title": "", scrollable: "" },
+                                      model: {
+                                        value: _vm.edit_entry_date,
+                                        callback: function ($$v) {
+                                          _vm.edit_entry_date = $$v
+                                        },
+                                        expression: "edit_entry_date",
+                                      },
+                                    },
+                                    [
+                                      _c("v-spacer"),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: { text: "", color: "primary" },
+                                          on: {
+                                            click: function ($event) {
+                                              _vm.edit_menu = false
+                                            },
+                                          },
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\r\n                                        Cancel\r\n                                    "
+                                          ),
+                                        ]
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-btn",
+                                        {
+                                          attrs: { text: "", color: "primary" },
+                                          on: {
+                                            click: function ($event) {
+                                              return _vm.$refs.edit_menu.save(
+                                                _vm.edit_entry_date
+                                              )
+                                            },
+                                          },
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\r\n                                        OK\r\n                                    "
+                                          ),
+                                        ]
+                                      ),
+                                    ],
+                                    1
+                                  ),
+                                ],
+                                1
+                              ),
+                            ],
+                            1
+                          ),
+                        ],
+                        1
+                      ),
+                    ],
+                    1
+                  ),
+                ],
+                1
+              ),
               _vm._v(" "),
               _c(
                 "v-card-actions",
                 [
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "teal darken-1", text: "" },
+                      on: {
+                        click: function ($event) {
+                          return _vm.delete_expense(_vm.expense_id)
+                        },
+                      },
+                    },
+                    [
+                      _vm._v(
+                        "\r\n                    Delete\r\n                "
+                      ),
+                    ]
+                  ),
+                  _vm._v(" "),
                   _c("v-spacer"),
                   _vm._v(" "),
                   _c(
                     "v-btn",
                     {
                       attrs: { color: "teal darken-1", text: "" },
-                      on: { click: _vm.closeDelete }
+                      on: { click: _vm.closeEdit },
                     },
-                    [_vm._v("Cancel")]
+                    [
+                      _vm._v(
+                        "\r\n                    Cancel\r\n                "
+                      ),
+                    ]
                   ),
                   _vm._v(" "),
                   _c(
                     "v-btn",
                     {
                       attrs: { color: "teal darken-1", text: "" },
-                      on: { click: _vm.deleteExpenseConfirm }
+                      on: {
+                        click: function ($event) {
+                          return _vm.save_edit_expense(_vm.expense_id)
+                        },
+                      },
                     },
-                    [_vm._v("OK")]
+                    [
+                      _vm._v(
+                        "\r\n                    Update\r\n                "
+                      ),
+                    ]
                   ),
-                  _vm._v(" "),
-                  _c("v-spacer")
                 ],
                 1
-              )
+              ),
             ],
             1
-          )
+          ),
         ],
         1
       ),
-      _vm._v(" "),
-      _c(
-        "v-dialog",
-        {
-          attrs: { "max-width": "280px" },
-          model: {
-            value: _vm.dialogRestore,
-            callback: function($$v) {
-              _vm.dialogRestore = $$v
-            },
-            expression: "dialogRestore"
-          }
-        },
-        [
-          _c(
-            "v-card",
-            [
-              _c("v-card-title", { attrs: { align: "center" } }, [
-                _vm._v("Are you sure you want to retrieve this process?")
-              ]),
-              _vm._v(" "),
-              _c(
-                "v-card-actions",
-                [
-                  _c("v-spacer"),
-                  _vm._v(" "),
-                  _c(
-                    "v-btn",
-                    {
-                      attrs: { color: "teal darken-1", text: "" },
-                      on: { click: _vm.closeDelete }
-                    },
-                    [_vm._v("Cancel")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-btn",
-                    {
-                      attrs: { color: "teal darken-1", text: "" },
-                      on: { click: _vm.restoreExpenseConfirm }
-                    },
-                    [_vm._v("OK")]
-                  ),
-                  _vm._v(" "),
-                  _c("v-spacer")
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      )
     ],
     1
   )

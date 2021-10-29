@@ -16,6 +16,7 @@ class CreateExpenseCategoriesTable extends Migration
         Schema::create('expense_categories', function (Blueprint $table) {
             $table->id('category_id');
             $table->string('category_name');
+            $table->string('description')->nullable();
             $table->dateTime('created_at');
             $table->integer('created_by');
             $table->dateTime('deleted_at')->nullable();

@@ -77,9 +77,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -89,40 +86,37 @@ __webpack_require__.r(__webpack_exports__);
       role: null,
       items: [{
         icon: 'mdi-cash',
-        text: 'My Expenses',
-        to: 'new_expense',
-        accessibleBy: [1, 2]
-      }, {
-        icon: 'mdi-chart-bar',
-        text: 'Expense Chart',
-        to: 'expense_chart',
-        accessibleBy: [1, 2]
-      }, {
-        icon: 'mdi-account-key',
-        text: 'Change Password',
-        to: 'change_password',
-        accessibleBy: [1, 2]
+        text: 'Dashboard',
+        to: 'expense_chart'
       }, {
         icon: 'mdi-chevron-up',
         'icon-alt': 'mdi-chevron-down',
-        text: 'Settings',
-        accessibleBy: [1],
+        text: 'User Management',
         children: [{
-          icon: 'mdi-plus',
-          text: 'Expense Category',
-          to: 'new_category'
+          icon: 'mdi-account-cog',
+          text: 'Roles',
+          to: 'roles'
         }, {
           icon: 'mdi-account-plus',
           text: 'Users',
           to: 'new_users'
         }, {
-          icon: 'mdi-account-cash',
-          text: 'Track Users Expenses',
-          to: 'users_expenses'
+          icon: 'mdi-account-key',
+          text: 'Change Password',
+          to: 'change_password'
+        }]
+      }, {
+        icon: 'mdi-chevron-up',
+        'icon-alt': 'mdi-chevron-down',
+        text: 'Expense Management',
+        children: [{
+          icon: 'mdi-plus',
+          text: 'Expense Categories',
+          to: 'new_category'
         }, {
-          icon: 'mdi-account-cog',
-          text: 'User Type',
-          to: 'roles'
+          icon: 'mdi-cash',
+          text: 'Expenses',
+          to: 'new_expense'
         }]
       }]
     };
@@ -209,7 +203,7 @@ if(false) {}
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
+var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -222,11 +216,11 @@ var render = function() {
           attrs: { clipped: _vm.$vuetify.breakpoint.lgAndUp, app: "" },
           model: {
             value: _vm.drawer,
-            callback: function($$v) {
+            callback: function ($$v) {
               _vm.drawer = $$v
             },
-            expression: "drawer"
-          }
+            expression: "drawer",
+          },
         },
         [
           _c(
@@ -238,7 +232,7 @@ var render = function() {
                   _vm._s(_vm.user_details.firstname) +
                     " " +
                     _vm._s(_vm.user_details.lastname)
-                )
+                ),
               ]),
               _vm._v(" "),
               _c(
@@ -246,17 +240,17 @@ var render = function() {
                 { attrs: { outlined: "", small: "", color: "teal" } },
                 [
                   _c("v-icon", { attrs: { left: "" } }, [
-                    _vm._v("mdi-account-circle")
+                    _vm._v("mdi-account-circle"),
                   ]),
                   _vm._v(" "),
                   _c(
                     "span",
                     { staticStyle: { "font-family": "Trebuchet MS" } },
                     [_vm._v("LOGGED-IN AS " + _vm._s(_vm.role))]
-                  )
+                  ),
                 ],
                 1
-              )
+              ),
             ],
             1
           ),
@@ -267,7 +261,7 @@ var render = function() {
             "v-list",
             { attrs: { dense: "" } },
             [
-              _vm._l(_vm.items, function(item) {
+              _vm._l(_vm.items, function (item) {
                 return [
                   item.heading
                     ? _c(
@@ -284,9 +278,9 @@ var render = function() {
                                       "\r\n                            " +
                                         _vm._s(item.heading) +
                                         "\r\n                        "
-                                    )
+                                    ),
                                   ])
-                                : _vm._e()
+                                : _vm._e(),
                             ],
                             1
                           ),
@@ -295,19 +289,19 @@ var render = function() {
                             "v-col",
                             {
                               staticClass: "text-center",
-                              attrs: { cols: "6" }
+                              attrs: { cols: "6" },
                             },
                             [
                               _c(
                                 "a",
                                 {
                                   staticClass: "body-2 black--text",
-                                  attrs: { href: "#!" }
+                                  attrs: { href: "#!" },
                                 },
                                 [_vm._v("EDIT")]
-                              )
+                              ),
                             ]
-                          )
+                          ),
                         ],
                         1
                       )
@@ -315,28 +309,19 @@ var render = function() {
                     ? _c(
                         "v-list-group",
                         {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: item.accessibleBy.includes(
-                                _vm.user_details.role
-                              ),
-                              expression:
-                                "item.accessibleBy.includes(user_details.role)"
-                            }
-                          ],
                           key: item.text,
                           attrs: {
                             "prepend-icon": item.model
                               ? item.icon
-                              : item["icon-alt"]
+                              : item["icon-alt"],
+                            "append-icon": "",
+                            to: item.to,
                           },
                           scopedSlots: _vm._u(
                             [
                               {
                                 key: "activator",
-                                fn: function() {
+                                fn: function () {
                                   return [
                                     _c(
                                       "v-list-item-content",
@@ -346,47 +331,36 @@ var render = function() {
                                             "\r\n                                " +
                                               _vm._s(item.text) +
                                               "\r\n                            "
-                                          )
-                                        ])
+                                          ),
+                                        ]),
                                       ],
                                       1
-                                    )
+                                    ),
                                   ]
                                 },
-                                proxy: true
-                              }
+                                proxy: true,
+                              },
                             ],
                             null,
                             true
                           ),
                           model: {
                             value: item.model,
-                            callback: function($$v) {
+                            callback: function ($$v) {
                               _vm.$set(item, "model", $$v)
                             },
-                            expression: "item.model"
-                          }
+                            expression: "item.model",
+                          },
                         },
                         [
                           _vm._v(" "),
-                          _vm._l(item.children, function(child, i) {
+                          _vm._l(item.children, function (child, i) {
                             return _c(
                               "v-list-item",
                               {
-                                directives: [
-                                  {
-                                    name: "show",
-                                    rawName: "v-show",
-                                    value: item.accessibleBy.includes(
-                                      _vm.user_details.role
-                                    ),
-                                    expression:
-                                      "item.accessibleBy.includes(user_details.role)"
-                                  }
-                                ],
                                 key: i,
                                 staticClass: "a",
-                                attrs: { link: "", to: child.to }
+                                attrs: { link: "", to: child.to },
                               },
                               [
                                 child.icon
@@ -394,8 +368,8 @@ var render = function() {
                                       "v-list-item-action",
                                       [
                                         _c("v-icon", [
-                                          _vm._v(_vm._s(child.icon))
-                                        ])
+                                          _vm._v(_vm._s(child.icon)),
+                                        ]),
                                       ],
                                       1
                                     )
@@ -409,35 +383,24 @@ var render = function() {
                                         "\r\n                                " +
                                           _vm._s(child.text) +
                                           "\r\n                            "
-                                      )
-                                    ])
+                                      ),
+                                    ]),
                                   ],
                                   1
-                                )
+                                ),
                               ],
                               1
                             )
-                          })
+                          }),
                         ],
                         2
                       )
                     : _c(
                         "v-list-item",
                         {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: item.accessibleBy.includes(
-                                _vm.user_details.role
-                              ),
-                              expression:
-                                "item.accessibleBy.includes(user_details.role)"
-                            }
-                          ],
                           key: item.text,
                           staticClass: "a",
-                          attrs: { link: "", to: item.to }
+                          attrs: { link: "", to: item.to },
                         },
                         [
                           _c(
@@ -454,19 +417,19 @@ var render = function() {
                                   "\r\n                            " +
                                     _vm._s(item.text) +
                                     "\r\n                        "
-                                )
-                              ])
+                                ),
+                              ]),
                             ],
                             1
-                          )
+                          ),
                         ],
                         1
-                      )
+                      ),
                 ]
-              })
+              }),
             ],
             2
-          )
+          ),
         ],
         1
       ),
@@ -479,30 +442,24 @@ var render = function() {
             app: "",
             dense: "",
             color: "teal",
-            dark: ""
-          }
+            dark: "",
+          },
         },
         [
           _c("v-app-bar-nav-icon", {
             on: {
-              click: function($event) {
+              click: function ($event) {
                 $event.stopPropagation()
                 _vm.drawer = !_vm.drawer
-              }
-            }
+              },
+            },
           }),
           _vm._v(" "),
-          _c(
-            "v-toolbar-title",
-            { staticClass: "ml-0 pl-4", staticStyle: { width: "300px" } },
-            [
-              _c("span", { staticClass: "hidden-sm-and-down" }, [
-                _vm._v("EXPENSE MANAGER")
-              ])
-            ]
-          ),
-          _vm._v(" "),
           _c("v-spacer"),
+          _vm._v(" "),
+          _c("span", { staticClass: "hidden-sm-and-down" }, [
+            _vm._v("Welcome to Expense Management"),
+          ]),
           _vm._v(" "),
           _c(
             "v-btn",
@@ -510,17 +467,17 @@ var render = function() {
               staticStyle: { "text-decoration": "none" },
               attrs: { icon: "" },
               on: {
-                click: function($event) {
+                click: function ($event) {
                   return _vm.logout()
-                }
-              }
+                },
+              },
             },
             [_c("v-icon", [_vm._v("mdi-logout")])],
             1
-          )
+          ),
         ],
         1
-      )
+      ),
     ],
     1
   )

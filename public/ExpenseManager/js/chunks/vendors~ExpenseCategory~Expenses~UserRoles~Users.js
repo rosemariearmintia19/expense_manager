@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[2],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["vendors~ExpenseCategory~Expenses~UserRoles~Users"],{
 
 /***/ "./node_modules/moment/locale/af.js":
 /*!******************************************!*\

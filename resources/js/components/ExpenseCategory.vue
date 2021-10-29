@@ -1,23 +1,19 @@
 <template>
 <div class="container-fluid">
-    <v-card class="pa-6">
-        <v-toolbar light extended height="4">
+    <v-card class="mt-10">
+        <v-toolbar class="mt-10" light extended height="4">
             <v-toolbar-title class="dark--text mt-10" style="font-family:Trebuchet MS">
-                Expense Category List
+                Expense Categories
             </v-toolbar-title>
-            <template v-slot:extension>
-                <v-btn fab color="teal" class="white--text" bottom right absolute @click="dialog = !dialog">
-                    <v-icon>mdi-plus</v-icon>
-                </v-btn>
-            </template>
         </v-toolbar>
         <hr>
-        <v-simple-table class="mt-2" dense fixed-header height="400">
+
+        <v-simple-table class="mt-10" dense fixed-header height="400">
             <thead>
                 <tr>
                     <th style="background-color:teal;color:white">No.</th>
-                    <th style="background-color:teal;color:white">Category Name</th>
-                    <th style="background-color:teal;color:white">Status</th>
+                    <th style="background-color:teal;color:white">Display Name</th>
+                    <th style="background-color:teal;color:white">Description</th>
                     <th style="background-color:teal;color:white">Actions</th>
                 </tr>
             </thead>
@@ -25,35 +21,29 @@
                 <tr v-for="list in category_lists" :key="list.category_id">
                     <td>{{list.category_id}}.</td>
                     <td>
-                        <span v-show="!list.edit">{{list.category_name}}</span>
-                        <v-text-field v-show="list.edit" dense v-model="list.category_name"></v-text-field>
+                        <v-tooltip bottom>
+                            <template v-slot:activator="{ on, attrs }">
+                                <span v-bind="attrs" v-on="on" class="aa" @click="UpdateCategory(list)">{{list.category_name}}</span>
+                            </template>
+                            <span>Update</span>
+                        </v-tooltip>
                     </td>
                     <td>
-                        <v-chip x-small :color="getColor(list.deleted_at)" dark dense>
-                            {{ list.deleted_at}}
-                        </v-chip>
+                        <span>{{list.description}}</span>
                     </td>
                     <td>
-                        <v-btn icon dense x-small v-if="!list.edit" @click="edit_category(list.category_id)">
-                            <v-icon>mdi-pencil</v-icon>
-                        </v-btn>
-                        <v-btn icon dense x-small v-else @click="save_edit_category(list)">
-                            <v-icon>mdi-content-save</v-icon>
-                        </v-btn>
-                        <v-icon small v-if="list.deleted_at == 'Deleted'" @click="restore_category(list)">
-                            mdi-restore
-                        </v-icon>
-                        <v-btn icon x-small v-if="list.deleted_at == 'Active'" @click="delete_category(list)">
-                            <v-icon dense>mdi-delete</v-icon>
-                        </v-btn>
+                        {{ list.created_at}}
                     </td>
                 </tr>
             </tbody>
         </v-simple-table>
     </v-card>
+    <v-btn color="teal" class="white--text" bottom right absolute @click="dialog = !dialog">
+        Add Category
+    </v-btn>
     <v-dialog v-model="dialog" max-width="400px">
         <v-card>
-            <v-card-title>
+            <v-card-title style="background-color:teal;color:white">
                 <span class="headline">{{ formTitle }}</span>
             </v-card-title>
 
@@ -61,7 +51,8 @@
                 <v-container>
                     <v-row>
                         <v-col>
-                                <v-text-field v-model="category_name" label="Category name" outlined dense></v-text-field>
+                            <v-text-field v-model="category_name" label="Category name" outlined dense></v-text-field>
+                            <v-text-field v-model="description" label="Description" outlined dense></v-text-field>
                         </v-col>
                     </v-row>
                 </v-container>
@@ -78,25 +69,33 @@
             </v-card-actions>
         </v-card>
     </v-dialog>
-    <v-dialog v-model="dialogDelete" max-width="280px">
+    <v-dialog v-model="UpdateCategoryDialog" max-width="400px">
         <v-card>
-            <v-card-title align="center">Are you sure you want to delete this process?</v-card-title>
+            <v-card-title style="background-color:teal;color:white">
+                <span class="headline">Update Category</span>
+            </v-card-title>
+            <v-card-text>
+                <v-container>
+                    <v-row>
+                        <v-col>
+                            <v-text-field v-model="edit_display_name" label="Display Name" outlined dense>{{edit_display_name}}</v-text-field>
+                            <v-text-field v-model="edit_description" label="Description" outlined dense>{{edit_description}}</v-text-field>
+                        </v-col>
+                    </v-row>
+                </v-container>
+            </v-card-text>
+
             <v-card-actions>
+                <v-btn color="teal darken-1" text @click="delete_category(category_id)">
+                    Delete
+                </v-btn>
                 <v-spacer></v-spacer>
-                <v-btn color="teal darken-1" text @click="closeDelete">Cancel</v-btn>
-                <v-btn color="teal darken-1" text @click="deleteCategoryConfirm">OK</v-btn>
-                <v-spacer></v-spacer>
-            </v-card-actions>
-        </v-card>
-    </v-dialog>
-    <v-dialog v-model="dialogRestore" max-width="280px">
-        <v-card>
-            <v-card-title align="center">Are you sure you want to retrieve this process?</v-card-title>
-            <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="teal darken-1" text @click="closeRestore">Cancel</v-btn>
-                <v-btn color="teal darken-1" text @click="restoreCategoryConfirm">OK</v-btn>
-                <v-spacer></v-spacer>
+                <v-btn color="teal darken-1" text @click="closeEdit">
+                    Cancel
+                </v-btn>
+                <v-btn color="teal darken-1" text @click="save_edit_category(category_id)">
+                    Update
+                </v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
@@ -104,6 +103,7 @@
 </template>
 
 <script>
+import moment from 'moment/moment'
 export default {
     data() {
         return {
@@ -112,13 +112,17 @@ export default {
             dialogRestore: false,
             editedIndex: -1,
             category_name: null,
+            description: null,
             category_lists: {},
+            UpdateCategoryDialog: false,
+            edit_display_name: null,
+            edit_description: null,
         }
     },
 
     computed: {
         formTitle() {
-            return this.editedIndex === -1 ? 'New Expende Category' : 'Edit Item'
+            return this.editedIndex === -1 ? 'Add Category' : 'Edit Item'
         },
     },
     created() {
@@ -128,86 +132,53 @@ export default {
         dialog(val) {
             val || this.close()
         },
-        dialogDelete(val) {
-            val || this.closeDelete()
-        },
     },
     methods: {
-        save_edit_category(category) {
+        delete_category(category_id) {
+            if (confirm("Do you really want to delete?")) {
+                this.user = JSON.parse(localStorage.getItem('user'))
+                axios.post('api/DeleteCategory', {
+                    updated_by: this.user.id,
+                    category_id: category_id
+                }).then(res => {
+                    this.category_list_table()
+                    this.UpdateCategoryDialog = false
+                })
+            }
+        },
+        save_edit_category(category_id) {
             this.user = JSON.parse(localStorage.getItem('user'))
             axios.post('api/SaveEditCategory', {
-                user_id : this.user.id,
-                category_id: category.category_id,
-                category_name: category.category_name
+                update_by: this.user.id,
+                category_id: category_id,
+                category_name: this.edit_display_name,
+                description: this.edit_description
             }).then(res => {
                 this.category_list_table()
+                this.UpdateCategoryDialog = false
             })
         },
-        edit_category(category_id) {
-            for (let x = 0; x < this.category_lists.length; x++) {
-                if (category_id == this.category_lists[x].category_id) {
-                    if (this.category_lists[x].edit) {
-                        this.category_lists[x].edit = false
-                    } else {
-                        this.category_lists[x].edit = true
-                    }
-                }
-                console.log(this.category_lists)
-            }
-
-        },
-        
-        getColor(deleted_at) {
-            if (deleted_at == 'Active') return 'green'
-            else return 'red'
-        },
-        deleteCategoryConfirm() {
-            this.user = JSON.parse(localStorage.getItem('user'))
-            axios.post('api/DeleteCategory', {
-                user_id : this.user.id,
-                category_id: this.category_list.category_id,
-            }).then(res => {
-                this.category_list_table()
-                this.closeDelete()
-            })
-        },
-        delete_category(list) {
-            this.dialogDelete = true
-            this.category_list = list
-        },
-        restore_category(list) {
-            this.dialogRestore = true
-            this.category_list = list
-        },
-        restoreCategoryConfirm() {
-            this.user = JSON.parse(localStorage.getItem('user'))
-            axios.post('api/RestoreCategory', {
-                user_id : this.user.id,
-                category_id: this.category_list.category_id
-            }).then(res => {
-                this.category_list_table()
-                this.closeRestore()
-            })
+        UpdateCategory(list) {
+            this.UpdateCategoryDialog = true
+            this.category_id = list.category_id
+            this.edit_display_name = list.category_name
+            this.edit_description = list.description
         },
         category_list_table() {
             axios.get('api/Category')
                 .then(res => {
                     this.category_lists = res.data
                     for (var i = 0; i < this.category_lists.length; i++) {
-                        this.$set(this.category_lists[i], 'edit', false)
-                        if (this.category_lists[i].deleted_at) {
-                            this.category_lists[i].deleted_at = 'Deleted';
-                        } else {
-                            this.category_lists[i].deleted_at = 'Active';
-                        }
+                        this.category_lists[i].created_at = moment(res.data[i].created_at).format('YYYY-MM-DD')
                     }
                 })
         },
-         save_new_category() {
+        save_new_category() {
             this.user = JSON.parse(localStorage.getItem('user'))
             axios.post('api/Category', {
-                user_id : this.user.id,
-                category_name: this.category_name
+                user_id: this.user.id,
+                category_name: this.category_name,
+                description: this.description
             }).then(res => {
                 this.dialog = false
                 this.category_list_table()
@@ -224,16 +195,8 @@ export default {
                 this.editedIndex = -1
             })
         },
-
-        closeDelete() {
-            this.dialogDelete = false
-            this.$nextTick(() => {
-                this.editedItem = Object.assign({}, this.defaultItem)
-                this.editedIndex = -1
-            })
-        },
-        closeRestore() {
-            this.dialogRestore = false
+        closeEdit() {
+            this.UpdateCategoryDialog = false
             this.$nextTick(() => {
                 this.editedItem = Object.assign({}, this.defaultItem)
                 this.editedIndex = -1
@@ -248,5 +211,10 @@ export default {
 .v-data-table>.v-data-table__wrapper>table>thead>tr>th {
     font-size: 12px !important;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.aa:hover {
+    cursor: pointer;
+    color: teal
 }
 </style>

@@ -11,15 +11,15 @@ class UserController extends Controller
 {
 
     public function index(){
-        return User::join('roles','roles.role_id','users.role')
-        ->select('users.id','users.firstname','users.lastname','users.email','roles.role_id','roles.name','users.deleted_at')
+        return User::whereNUll('users.deleted_at')
+        ->join('roles','roles.role_id','users.role')
+        ->select('users.id','users.name','users.email','roles.role_id','roles.name as role','users.created_at')
         ->get();
     }
 
     public function store(Request $request){
         $User = new User();
-        $User->firstname = $request->firstname;
-        $User->lastname = $request->lastname;
+        $User->name = $request->fullname;
         $User->email = $request->email;
         $User->role = $request->role;
         $User->password = Hash::make($request->password);
@@ -30,20 +30,14 @@ class UserController extends Controller
     }
 
     public function SaveEditUser(Request $request){
-        User::where('id',$request->id)
-        ->update(["firstname" => $request->firstname,"lastname" => $request->lastname,"email" => $request->email,"role" => $request->role,"updated_by" => $request->user_id,"updated_at" => Carbon::now()]);
+        User::where('id',$request->user_id)
+        ->update(["name" => $request->name,"email" => $request->email,"role" => $request->role_id,"updated_by" => $request->updated_by,"updated_at" => Carbon::now()]);
         return response()->json(['message'=>'Data has been created successfully!'],201);   
     }
 
     public function DeleteUser(Request $request){
-        User::where('id',$request->id)
-        ->update(["deleted_at" => Carbon::now(),"updated_by" => $request->user_id,"updated_at" => Carbon::now()]);
-        return response()->json(['message'=>'Data has been created successfully!'],201);   
-    }
-
-    public function RestoreUser(Request $request){
-        User::where('id',$request->id)
-        ->update(["deleted_at" => null,"updated_by" => $request->user_id,"updated_at" => Carbon::now()]);
+        User::where('id',$request->user_id)
+        ->update(["deleted_at" => Carbon::now(),"updated_by" => $request->updated_by,"updated_at" => Carbon::now()]);
         return response()->json(['message'=>'Data has been created successfully!'],201);   
     }
 
@@ -65,8 +59,7 @@ class UserController extends Controller
 
     public function Register (Request $request){
         $NewUser = new User();
-        $NewUser->firstname = $request->firstname;
-        $NewUser->lastname = $request->lastname;
+        $NewUser->name = $request->name;
         $NewUser->email = $request->email;
         $NewUser->password = Hash::make($request->password);
         $NewUser->role = $request->role;

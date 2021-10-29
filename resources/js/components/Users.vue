@@ -5,67 +5,40 @@
             <v-toolbar-title class="dark--text mt-10" style="font-family:Trebuchet MS">
                 User List
             </v-toolbar-title>
-            <template v-slot:extension>
-                <v-btn fab color="teal" class="white--text" bottom right absolute @click="dialog = !dialog">
-                    <v-icon>mdi-plus</v-icon>
-                </v-btn>
-            </template>
         </v-toolbar>
-        <hr>
-        <v-simple-table dense fixed-header height="400">
+        <v-simple-table class="mt-2" dense fixed-header height="400">
             <thead>
                 <tr>
                     <th style="background-color:teal;color:white">No.</th>
-                    <th style="background-color:teal;color:white">Firstname</th>
-                    <th style="background-color:teal;color:white">LastName</th>
+                    <th style="background-color:teal;color:white">Name</th>
                     <th style="background-color:teal;color:white">Email</th>
                     <th style="background-color:teal;color:white">Role</th>
-                    <th style="background-color:teal;color:white">Status</th>
-                    <th style="background-color:teal;color:white">Actions</th>
+                    <th style="background-color:teal;color:white">Creted At</th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="list in user_list" :key="list.id">
                     <td>{{list.id}}.</td>
-                    <td>
-                        <span v-show="!list.edit">{{list.firstname}}</span>
-                        <v-text-field v-show="list.edit" dense v-model="list.firstname"></v-text-field>
+                    <td v-if="list.role_id == 1">
+                        <span>{{list.name}}</span>
                     </td>
-                     <td>
-                        <span v-show="!list.edit">{{list.lastname}}</span>
-                        <v-text-field v-show="list.edit" dense v-model="list.lastname"></v-text-field>
+                    <td v-else>
+                        <span class="aa" @click="UpdateUser(list)">{{list.name}}</span>
                     </td>
                     <td>
                         <span v-show="!list.edit">{{list.email}}</span>
-                        <v-text-field v-show="list.edit" dense v-model="list.email"></v-text-field>
                     </td>
                     <td>
-                        <span v-show="!list.edit">{{list.name}}</span>
-                        <v-select class="mt-2" v-show="list.edit" v-model="list.role_id" dense outlined label="Role" :items="roles" item-value="role_id" item-text="name"></v-select>
+                        <span>{{list.role}}</span>
                     </td>
-                    <td>
-                        <v-chip x-small :color="getColor(list.deleted_at)" dark dense>
-                            {{ list.deleted_at}}
-                        </v-chip>
-                    </td>
-                    <td>
-                        <v-btn icon dense x-small v-if="!list.edit" @click="edit_user(list.id)">
-                            <v-icon>mdi-pencil</v-icon>
-                        </v-btn>
-                        <v-btn icon dense x-small v-else @click="save_edit_user(list)">
-                            <v-icon>mdi-content-save</v-icon>
-                        </v-btn>
-                        <v-icon small v-if="list.deleted_at == 'Deleted'" @click="restore_user(list)">
-                            mdi-restore
-                        </v-icon>
-                        <v-btn icon x-small v-if="list.deleted_at == 'Active'" @click="delete_user(list)">
-                            <v-icon dense>mdi-delete</v-icon>
-                        </v-btn>
-                    </td>
+                    <td>{{ list.created_at}}</td>
                 </tr>
             </tbody>
         </v-simple-table>
     </v-card>
+    <v-btn color="teal" class="white--text" bottom right absolute @click="dialog = !dialog">
+        Add User
+    </v-btn>
     <v-dialog v-model="dialog" max-width="400px">
         <v-card>
             <v-card-title style="background-color:teal;color:white">
@@ -75,8 +48,7 @@
                 <v-container class="mt-5">
                     <v-row>
                         <v-col>
-                            <v-text-field class="mt-2" v-model="firstname" dense outlined label="Firstname"></v-text-field>
-                            <v-text-field v-model="lastname" dense outlined label="Lastname"></v-text-field>
+                            <v-text-field class="mt-2" v-model="fullname" dense outlined label="Fullname"></v-text-field>
                             <v-text-field class="mt-2" v-model="email" dense outlined label="Email"></v-text-field>
                             <v-select v-model="role" label="Roles" :items="roles" item-value="role_id" item-text="name" outlined dense></v-select>
                             <v-text-field v-model="password" dense outlined label="Password" type="password"></v-text-field>
@@ -96,25 +68,34 @@
             </v-card-actions>
         </v-card>
     </v-dialog>
-    <v-dialog v-model="dialogDelete" max-width="280px">
+    <v-dialog v-model="UpdateUserDialog" max-width="400px">
         <v-card>
-            <v-card-title align="center">Are you sure you want to delete this staff?</v-card-title>
+            <v-card-title style="background-color:teal;color:white">
+                <span class="headline">Update User</span>
+            </v-card-title>
+            <v-card-text>
+                <v-container class="mt-5">
+                    <v-row>
+                        <v-col>
+                            <v-text-field class="mt-2" v-model="edit_fullname" dense outlined label="Fullname"></v-text-field>
+                            <v-text-field class="mt-2" v-model="edit_email" dense outlined label="Email"></v-text-field>
+                            <v-select v-model="edit_role" label="Roles" :items="roles" item-value="role_id" item-text="name" outlined dense></v-select>
+                        </v-col>
+                    </v-row>
+                </v-container>
+            </v-card-text>
+
             <v-card-actions>
+                <v-btn color="teal darken-1" text @click="delete_user(user_id)">
+                    Delete
+                </v-btn>
                 <v-spacer></v-spacer>
-                <v-btn color="teal darken-1" text @click="closeDelete">Cancel</v-btn>
-                <v-btn color="teal darken-1" text @click="deleteUserConfirm">OK</v-btn>
-                <v-spacer></v-spacer>
-            </v-card-actions>
-        </v-card>
-    </v-dialog>
-    <v-dialog v-model="dialogRestore" max-width="280px">
-        <v-card>
-            <v-card-title align="center">Are you sure you want to retrieve this staff?</v-card-title>
-            <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="teal darken-1" text @click="closeRestore">Cancel</v-btn>
-                <v-btn color="teal darken-1" text @click="restoreUserConfirm">OK</v-btn>
-                <v-spacer></v-spacer>
+                <v-btn color="teal darken-1" text @click="closeEdit">
+                    Cancel
+                </v-btn>
+                <v-btn color="teal darken-1" text @click="save_edit_user(user_id)">
+                    Update
+                </v-btn>
             </v-card-actions>
         </v-card>
     </v-dialog>
@@ -129,13 +110,12 @@ export default {
             dialog: false,
             dialogDelete: false,
             dialogRestore: false,
-            user_list:{},
-            firstname : null,
-            lastname : null,
-            email : null,
+            user_list: {},
+            fullname: null,
+            email: null,
             role: '',
-            roles:[],
-            password:null,
+            roles: [],
+            password: null,
             editedIndex: -1,
             editedItem: {
                 employee_code: '',
@@ -148,6 +128,11 @@ export default {
             defaultItem: {
                 name: '',
             },
+            edit_fullname: null,
+            edit_email: null,
+            edit_role: null,
+            UpdateUserDialog: false
+
         }
     },
     computed: {
@@ -169,6 +154,37 @@ export default {
         },
     },
     methods: {
+        delete_user(user_id) {
+            if (confirm("Do you really want to delete?")) {
+                this.user = JSON.parse(localStorage.getItem('user'))
+                axios.post('api/DeleteUser', {
+                    updated_by: this.user.id,
+                    user_id: user_id
+                }).then(res => {
+                    this.get_lists()
+                })
+            }
+        },
+        save_edit_user(user_id) {
+            this.user = JSON.parse(localStorage.getItem('user'))
+            axios.post('api/SaveEditUser', {
+                updated_by: this.user.id,
+                user_id: user_id,
+                name: this.edit_fullname,
+                email: this.edit_email,
+                role_id: this.edit_role
+            }).then(res => {
+                this.get_lists()
+                this.UpdateUserDialog = false
+            })
+        },
+        UpdateUser(list) {
+            this.UpdateUserDialog = true
+            this.user_id = list.id
+            this.edit_fullname = list.name
+            this.edit_email = list.email
+            this.edit_role = list.role
+        },
         get_roles() {
             axios.get('api/GetRoles')
                 .then(res => {
@@ -191,69 +207,15 @@ export default {
                         } else {
                             this.user_list[i].deleted_at = 'Active';
                         }
+                        this.user_list[i].created_at = moment(res.data[i].created_at).format('YYYY-MM-DD')
                     }
                 })
-        },
-        restoreUserConfirm() {
-            this.user = JSON.parse(localStorage.getItem('user'))
-            axios.post('api/RestoreUser', {
-                user_id : this.user.id,
-                id: this.user_lists.id,
-            }).then(res => {
-                this.get_lists()
-                this.closeRestore()
-            })
-        },
-        restore_user(list) {
-            this.dialogRestore = true
-            this.user_lists = list
-        },
-        deleteUserConfirm() {
-            this.user = JSON.parse(localStorage.getItem('user'))
-            axios.post('api/DeleteUser', {
-                user_id : this.user.id,
-                id: this.user_lists.id,
-            }).then(res => {
-                this.get_lists()
-                this.closeDelete()
-            })
-
-        },
-        delete_user(list) {
-            this.dialogDelete = true
-            this.user_lists = list
-        },
-        save_edit_user(list) {
-            this.user = JSON.parse(localStorage.getItem('user'))
-            axios.post('api/SaveEditUser', {
-                user_id : this.user.id,
-                id: list.id,
-                firstname: list.firstname,
-                lastname: list.lastname,
-                email: list.email,
-                role: list.role_id
-            }).then(res => {
-                this.get_lists()
-            })
-        },
-        edit_user(id) {
-            for (let x = 0; x < this.user_list.length; x++) {
-                if (id == this.user_list[x].id) {
-                    if (this.user_list[x].edit) {
-                        this.user_list[x].edit = false
-                    } else {
-                        this.user_list[x].edit = true
-                    }
-                }
-            }
-
         },
         save_new_users() {
             this.user = JSON.parse(localStorage.getItem('user'))
             axios.post('api/User', {
-                user_id : this.user.id,
-                firstname: this.firstname,
-                lastname: this.lastname,
+                user_id: this.user.id,
+                fullname: this.fullname,
                 email: this.email,
                 role: this.role,
                 password: this.password,
@@ -266,10 +228,16 @@ export default {
                 }
             )
         },
-        
 
         close() {
             this.dialog = false
+            this.$nextTick(() => {
+                this.editedItem = Object.assign({}, this.defaultItem)
+                this.editedIndex = -1
+            })
+        },
+        closeEdit() {
+            this.UpdateUserDialog = false
             this.$nextTick(() => {
                 this.editedItem = Object.assign({}, this.defaultItem)
                 this.editedIndex = -1
@@ -293,3 +261,10 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.aa:hover {
+    cursor: pointer;
+    color: teal
+}
+</style>
