@@ -93,7 +93,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {
+var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -101,7 +101,7 @@ var render = function () {
     "div",
     {
       staticClass: "container",
-      staticStyle: { position: "relative", top: "10%" },
+      staticStyle: { position: "relative", top: "10%" }
     },
     [
       _c(
@@ -115,7 +115,7 @@ var render = function () {
                 "v-container",
                 {
                   staticClass: "text-xs-center",
-                  staticStyle: { position: "relative", top: "5%" },
+                  staticStyle: { position: "relative", top: "5%" }
                 },
                 [
                   _c(
@@ -128,7 +128,7 @@ var render = function () {
                             "h1",
                             {
                               staticClass: "mt-10 mb-5",
-                              staticStyle: { color: "teal" },
+                              staticStyle: { color: "teal" }
                             },
                             [_vm._v("Sign Up")]
                           ),
@@ -139,20 +139,20 @@ var render = function () {
                               name: "Name",
                               label: "Name",
                               rules: [
-                                function () {
+                                function() {
                                   return !!_vm.name || "This field is required"
-                                },
+                                }
                               ],
                               "error-messages": _vm.errorMessages,
-                              required: "",
+                              required: ""
                             },
                             model: {
                               value: _vm.name,
-                              callback: function ($$v) {
+                              callback: function($$v) {
                                 _vm.name = $$v
                               },
-                              expression: "name",
-                            },
+                              expression: "name"
+                            }
                           }),
                           _vm._v(" "),
                           _c("v-select", {
@@ -162,15 +162,15 @@ var render = function () {
                               "item-value": "role_id",
                               "item-text": "name",
                               outlined: "",
-                              dense: "",
+                              dense: ""
                             },
                             model: {
                               value: _vm.role,
-                              callback: function ($$v) {
+                              callback: function($$v) {
                                 _vm.role = $$v
                               },
-                              expression: "role",
-                            },
+                              expression: "role"
+                            }
                           }),
                           _vm._v(" "),
                           _c("v-text-field", {
@@ -179,20 +179,20 @@ var render = function () {
                               name: "Email",
                               label: "Email",
                               rules: [
-                                function () {
+                                function() {
                                   return !!_vm.email || "This field is required"
-                                },
+                                }
                               ],
                               "error-messages": _vm.errorMessages,
-                              required: "",
+                              required: ""
                             },
                             model: {
                               value: _vm.email,
-                              callback: function ($$v) {
+                              callback: function($$v) {
                                 _vm.email = $$v
                               },
-                              expression: "email",
-                            },
+                              expression: "email"
+                            }
                           }),
                           _vm._v(" "),
                           _c("v-text-field", {
@@ -201,50 +201,50 @@ var render = function () {
                               name: "Password",
                               outlined: "",
                               rules: [
-                                function () {
+                                function() {
                                   return (
                                     !!_vm.password || "This field is required"
                                   )
-                                },
+                                }
                               ],
                               "error-messages": _vm.errorMessages,
                               label: "Password",
                               type: "password",
-                              required: "",
+                              required: ""
                             },
                             model: {
                               value: _vm.password,
-                              callback: function ($$v) {
+                              callback: function($$v) {
                                 _vm.password = $$v
                               },
-                              expression: "password",
-                            },
+                              expression: "password"
+                            }
                           }),
                           _vm._v(" "),
                           _c("v-text-field", {
                             attrs: {
                               id: "password",
                               rules: [
-                                function () {
+                                function() {
                                   return (
                                     !!_vm.repassword || "This field is required"
                                   )
-                                },
+                                }
                               ],
                               "error-messages": _vm.errorMessages,
                               name: "RePassword",
                               outlined: "",
                               label: "Re-enter Password",
-                              type: "password",
+                              type: "password"
                             },
                             on: { blur: _vm.CheckPassword },
                             model: {
                               value: _vm.repassword,
-                              callback: function ($$v) {
+                              callback: function($$v) {
                                 _vm.repassword = $$v
                               },
-                              expression: "repassword",
-                            },
+                              expression: "repassword"
+                            }
                           }),
                           _vm._v(" "),
                           _c(
@@ -259,34 +259,34 @@ var render = function () {
                                     primary: "",
                                     large: "",
                                     block: "",
-                                    color: "teal",
+                                    color: "teal"
                                   },
                                   on: {
-                                    click: function ($event) {
+                                    click: function($event) {
                                       return _vm.Register()
-                                    },
-                                  },
+                                    }
+                                  }
                                 },
                                 [_vm._v("Create Account")]
-                              ),
+                              )
                             ],
                             1
-                          ),
+                          )
                         ],
                         1
-                      ),
+                      )
                     ],
                     1
-                  ),
+                  )
                 ],
                 1
-              ),
+              )
             ],
             1
-          ),
+          )
         ],
         1
-      ),
+      )
     ],
     1
   )

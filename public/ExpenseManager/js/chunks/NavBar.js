@@ -165,7 +165,7 @@ if(false) {}
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {
+var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -178,11 +178,11 @@ var render = function () {
           attrs: { clipped: _vm.$vuetify.breakpoint.lgAndUp, app: "" },
           model: {
             value: _vm.drawer,
-            callback: function ($$v) {
+            callback: function($$v) {
               _vm.drawer = $$v
             },
-            expression: "drawer",
-          },
+            expression: "drawer"
+          }
         },
         [
           _c(
@@ -190,7 +190,7 @@ var render = function () {
             { staticClass: "mt-5", staticStyle: { "text-align": "center" } },
             [
               _c("h6", { staticStyle: { "font-family": "Trebuchet MS" } }, [
-                _vm._v(_vm._s(_vm.user_details.name)),
+                _vm._v(_vm._s(_vm.user_details.name))
               ]),
               _vm._v(" "),
               _c(
@@ -198,17 +198,17 @@ var render = function () {
                 { attrs: { outlined: "", small: "", color: "teal" } },
                 [
                   _c("v-icon", { attrs: { left: "" } }, [
-                    _vm._v("mdi-account-circle"),
+                    _vm._v("mdi-account-circle")
                   ]),
                   _vm._v(" "),
                   _c(
                     "span",
                     { staticStyle: { "font-family": "Trebuchet MS" } },
                     [_vm._v("LOGGED-IN AS " + _vm._s(_vm.role))]
-                  ),
+                  )
                 ],
                 1
-              ),
+              )
             ],
             1
           ),
@@ -227,7 +227,7 @@ var render = function () {
                     "v-list-item",
                     {
                       staticClass: "a",
-                      attrs: { link: "", to: { name: "expense_chart" } },
+                      attrs: { link: "", to: { name: "expense_chart" } }
                     },
                     [
                       _c(
@@ -236,7 +236,7 @@ var render = function () {
                         1
                       ),
                       _vm._v(" "),
-                      _c("v-list-item-title", [_vm._v("Dashboard")]),
+                      _c("v-list-item-title", [_vm._v("Dashboard")])
                     ],
                     1
                   ),
@@ -249,15 +249,15 @@ var render = function () {
                           name: "show",
                           rawName: "v-show",
                           value: _vm.user_details.role == 1,
-                          expression: "user_details.role == 1",
-                        },
+                          expression: "user_details.role == 1"
+                        }
                       ],
-                      staticStyle: { "font-weight": "bold" },
+                      staticStyle: { "font-weight": "bold" }
                     },
                     [
                       _vm._v(
                         "\r\n                    User Management\r\n                "
-                      ),
+                      )
                     ]
                   ),
                   _vm._v(" "),
@@ -269,11 +269,11 @@ var render = function () {
                           name: "show",
                           rawName: "v-show",
                           value: _vm.user_details.role == 1,
-                          expression: "user_details.role == 1",
-                        },
+                          expression: "user_details.role == 1"
+                        }
                       ],
                       staticClass: "a",
-                      attrs: { link: "", to: { name: "roles" } },
+                      attrs: { link: "", to: { name: "roles" } }
                     },
                     [
                       _c(
@@ -282,7 +282,7 @@ var render = function () {
                         1
                       ),
                       _vm._v(" "),
-                      _c("v-list-item-title", [_vm._v("Roles")]),
+                      _c("v-list-item-title", [_vm._v("Roles")])
                     ],
                     1
                   ),
@@ -295,11 +295,11 @@ var render = function () {
                           name: "show",
                           rawName: "v-show",
                           value: _vm.user_details.role == 1,
-                          expression: "user_details.role == 1",
-                        },
+                          expression: "user_details.role == 1"
+                        }
                       ],
                       staticClass: "a",
-                      attrs: { link: "", to: { name: "users" } },
+                      attrs: { link: "", to: { name: "users" } }
                     },
                     [
                       _c(
@@ -308,7 +308,7 @@ var render = function () {
                         1
                       ),
                       _vm._v(" "),
-                      _c("v-list-item-title", [_vm._v("Users")]),
+                      _c("v-list-item-title", [_vm._v("Users")])
                     ],
                     1
                   ),
@@ -316,7 +316,7 @@ var render = function () {
                   _c("span", { staticStyle: { "font-weight": "bold" } }, [
                     _vm._v(
                       "\r\n                    Expense Management\r\n                "
-                    ),
+                    )
                   ]),
                   _vm._v(" "),
                   _c(
@@ -327,11 +327,11 @@ var render = function () {
                           name: "show",
                           rawName: "v-show",
                           value: _vm.user_details.role == 1,
-                          expression: "user_details.role == 1",
-                        },
+                          expression: "user_details.role == 1"
+                        }
                       ],
                       staticClass: "a",
-                      attrs: { link: "", to: { name: "new_category" } },
+                      attrs: { link: "", to: { name: "new_category" } }
                     },
                     [
                       _c(
@@ -340,7 +340,7 @@ var render = function () {
                         1
                       ),
                       _vm._v(" "),
-                      _c("v-list-item-title", [_vm._v("Expense Category")]),
+                      _c("v-list-item-title", [_vm._v("Expense Category")])
                     ],
                     1
                   ),
@@ -349,7 +349,7 @@ var render = function () {
                     "v-list-item",
                     {
                       staticClass: "a",
-                      attrs: { link: "", to: { name: "new_expense" } },
+                      attrs: { link: "", to: { name: "new_expense" } }
                     },
                     [
                       _c(
@@ -358,16 +358,16 @@ var render = function () {
                         1
                       ),
                       _vm._v(" "),
-                      _c("v-list-item-title", [_vm._v("Expense")]),
+                      _c("v-list-item-title", [_vm._v("Expense")])
                     ],
                     1
-                  ),
+                  )
                 ],
                 1
-              ),
+              )
             ],
             1
-          ),
+          )
         ],
         1
       ),
@@ -380,23 +380,23 @@ var render = function () {
             app: "",
             dense: "",
             color: "teal",
-            dark: "",
-          },
+            dark: ""
+          }
         },
         [
           _c("v-app-bar-nav-icon", {
             on: {
-              click: function ($event) {
+              click: function($event) {
                 $event.stopPropagation()
                 _vm.drawer = !_vm.drawer
-              },
-            },
+              }
+            }
           }),
           _vm._v(" "),
           _c("v-spacer"),
           _vm._v(" "),
           _c("span", { staticClass: "hidden-sm-and-down" }, [
-            _vm._v("Welcome to Expense Management"),
+            _vm._v("Welcome to Expense Management")
           ]),
           _vm._v(" "),
           _c(
@@ -405,17 +405,17 @@ var render = function () {
               staticStyle: { "text-decoration": "none" },
               attrs: { icon: "" },
               on: {
-                click: function ($event) {
+                click: function($event) {
                   return _vm.logout()
-                },
-              },
+                }
+              }
             },
             [_c("v-icon", [_vm._v("mdi-logout")])],
             1
-          ),
+          )
         ],
         1
-      ),
+      )
     ],
     1
   )

@@ -651,7 +651,7 @@ if(false) {}
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {
+var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -671,10 +671,10 @@ var render = function () {
                 "v-toolbar-title",
                 {
                   staticClass: "dark--text mt-10",
-                  staticStyle: { "font-family": "Trebuchet MS" },
+                  staticStyle: { "font-family": "Trebuchet MS" }
                 },
                 [_vm._v("\r\n                User List\r\n            ")]
-              ),
+              )
             ],
             1
           ),
@@ -683,7 +683,7 @@ var render = function () {
             "v-simple-table",
             {
               staticClass: "mt-2",
-              attrs: { dense: "", "fixed-header": "", height: "400" },
+              attrs: { dense: "", "fixed-header": "", height: "400" }
             },
             [
               _c("thead", [
@@ -693,8 +693,8 @@ var render = function () {
                     {
                       staticStyle: {
                         "background-color": "teal",
-                        color: "white",
-                      },
+                        color: "white"
+                      }
                     },
                     [_vm._v("No.")]
                   ),
@@ -704,8 +704,8 @@ var render = function () {
                     {
                       staticStyle: {
                         "background-color": "teal",
-                        color: "white",
-                      },
+                        color: "white"
+                      }
                     },
                     [_vm._v("Name")]
                   ),
@@ -715,8 +715,8 @@ var render = function () {
                     {
                       staticStyle: {
                         "background-color": "teal",
-                        color: "white",
-                      },
+                        color: "white"
+                      }
                     },
                     [_vm._v("Email")]
                   ),
@@ -726,8 +726,8 @@ var render = function () {
                     {
                       staticStyle: {
                         "background-color": "teal",
-                        color: "white",
-                      },
+                        color: "white"
+                      }
                     },
                     [_vm._v("Role")]
                   ),
@@ -737,17 +737,17 @@ var render = function () {
                     {
                       staticStyle: {
                         "background-color": "teal",
-                        color: "white",
-                      },
+                        color: "white"
+                      }
                     },
                     [_vm._v("Creted At")]
-                  ),
-                ]),
+                  )
+                ])
               ]),
               _vm._v(" "),
               _c(
                 "tbody",
-                _vm._l(_vm.user_list, function (list) {
+                _vm._l(_vm.user_list, function(list) {
                   return _c("tr", { key: list.id }, [
                     _c("td", [_vm._v(_vm._s(list.id) + ".")]),
                     _vm._v(" "),
@@ -759,13 +759,13 @@ var render = function () {
                             {
                               staticClass: "aa",
                               on: {
-                                click: function ($event) {
+                                click: function($event) {
                                   return _vm.UpdateUser(list)
-                                },
-                              },
+                                }
+                              }
                             },
                             [_vm._v(_vm._s(list.name))]
-                          ),
+                          )
                         ]),
                     _vm._v(" "),
                     _c("td", [
@@ -777,23 +777,23 @@ var render = function () {
                               name: "show",
                               rawName: "v-show",
                               value: !list.edit,
-                              expression: "!list.edit",
-                            },
-                          ],
+                              expression: "!list.edit"
+                            }
+                          ]
                         },
                         [_vm._v(_vm._s(list.email))]
-                      ),
+                      )
                     ]),
                     _vm._v(" "),
                     _c("td", [_c("span", [_vm._v(_vm._s(list.role))])]),
                     _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(list.created_at))]),
+                    _c("td", [_vm._v(_vm._s(list.created_at))])
                   ])
                 }),
                 0
-              ),
+              )
             ]
-          ),
+          )
         ],
         1
       ),
@@ -804,10 +804,10 @@ var render = function () {
           staticClass: "white--text",
           attrs: { color: "teal", bottom: "", right: "", absolute: "" },
           on: {
-            click: function ($event) {
+            click: function($event) {
               _vm.dialog = !_vm.dialog
-            },
-          },
+            }
+          }
         },
         [_vm._v("\r\n        Add User\r\n    ")]
       ),
@@ -818,11 +818,11 @@ var render = function () {
           attrs: { "max-width": "400px" },
           model: {
             value: _vm.dialog,
-            callback: function ($$v) {
+            callback: function($$v) {
               _vm.dialog = $$v
             },
-            expression: "dialog",
-          },
+            expression: "dialog"
+          }
         },
         [
           _c(
@@ -833,8 +833,8 @@ var render = function () {
                 { staticStyle: { "background-color": "teal", color: "white" } },
                 [
                   _c("span", { staticClass: "headline" }, [
-                    _vm._v(_vm._s(_vm.formTitle)),
-                  ]),
+                    _vm._v(_vm._s(_vm.formTitle))
+                  ])
                 ]
               ),
               _vm._v(" "),
@@ -856,15 +856,15 @@ var render = function () {
                                 attrs: {
                                   dense: "",
                                   outlined: "",
-                                  label: "Fullname",
+                                  label: "Fullname"
                                 },
                                 model: {
                                   value: _vm.fullname,
-                                  callback: function ($$v) {
+                                  callback: function($$v) {
                                     _vm.fullname = $$v
                                   },
-                                  expression: "fullname",
-                                },
+                                  expression: "fullname"
+                                }
                               }),
                               _vm._v(" "),
                               _c("v-text-field", {
@@ -872,15 +872,15 @@ var render = function () {
                                 attrs: {
                                   dense: "",
                                   outlined: "",
-                                  label: "Email",
+                                  label: "Email"
                                 },
                                 model: {
                                   value: _vm.email,
-                                  callback: function ($$v) {
+                                  callback: function($$v) {
                                     _vm.email = $$v
                                   },
-                                  expression: "email",
-                                },
+                                  expression: "email"
+                                }
                               }),
                               _vm._v(" "),
                               _c("v-select", {
@@ -890,15 +890,15 @@ var render = function () {
                                   "item-value": "role_id",
                                   "item-text": "name",
                                   outlined: "",
-                                  dense: "",
+                                  dense: ""
                                 },
                                 model: {
                                   value: _vm.role,
-                                  callback: function ($$v) {
+                                  callback: function($$v) {
                                     _vm.role = $$v
                                   },
-                                  expression: "role",
-                                },
+                                  expression: "role"
+                                }
                               }),
                               _vm._v(" "),
                               _c("v-text-field", {
@@ -906,25 +906,25 @@ var render = function () {
                                   dense: "",
                                   outlined: "",
                                   label: "Password",
-                                  type: "password",
+                                  type: "password"
                                 },
                                 model: {
                                   value: _vm.password,
-                                  callback: function ($$v) {
+                                  callback: function($$v) {
                                     _vm.password = $$v
                                   },
-                                  expression: "password",
-                                },
-                              }),
+                                  expression: "password"
+                                }
+                              })
                             ],
                             1
-                          ),
+                          )
                         ],
                         1
-                      ),
+                      )
                     ],
                     1
-                  ),
+                  )
                 ],
                 1
               ),
@@ -938,12 +938,12 @@ var render = function () {
                     "v-btn",
                     {
                       attrs: { color: "teal darken-1", text: "" },
-                      on: { click: _vm.close },
+                      on: { click: _vm.close }
                     },
                     [
                       _vm._v(
                         "\r\n                    Cancel\r\n                "
-                      ),
+                      )
                     ]
                   ),
                   _vm._v(" "),
@@ -951,16 +951,16 @@ var render = function () {
                     "v-btn",
                     {
                       attrs: { color: "teal darken-1", text: "" },
-                      on: { click: _vm.save_new_users },
+                      on: { click: _vm.save_new_users }
                     },
                     [_vm._v("\r\n                    Save\r\n                ")]
-                  ),
+                  )
                 ],
                 1
-              ),
+              )
             ],
             1
-          ),
+          )
         ],
         1
       ),
@@ -971,11 +971,11 @@ var render = function () {
           attrs: { "max-width": "400px" },
           model: {
             value: _vm.UpdateUserDialog,
-            callback: function ($$v) {
+            callback: function($$v) {
               _vm.UpdateUserDialog = $$v
             },
-            expression: "UpdateUserDialog",
-          },
+            expression: "UpdateUserDialog"
+          }
         },
         [
           _c(
@@ -986,8 +986,8 @@ var render = function () {
                 { staticStyle: { "background-color": "teal", color: "white" } },
                 [
                   _c("span", { staticClass: "headline" }, [
-                    _vm._v("Update User"),
-                  ]),
+                    _vm._v("Update User")
+                  ])
                 ]
               ),
               _vm._v(" "),
@@ -1009,15 +1009,15 @@ var render = function () {
                                 attrs: {
                                   dense: "",
                                   outlined: "",
-                                  label: "Fullname",
+                                  label: "Fullname"
                                 },
                                 model: {
                                   value: _vm.edit_fullname,
-                                  callback: function ($$v) {
+                                  callback: function($$v) {
                                     _vm.edit_fullname = $$v
                                   },
-                                  expression: "edit_fullname",
-                                },
+                                  expression: "edit_fullname"
+                                }
                               }),
                               _vm._v(" "),
                               _c("v-text-field", {
@@ -1025,15 +1025,15 @@ var render = function () {
                                 attrs: {
                                   dense: "",
                                   outlined: "",
-                                  label: "Email",
+                                  label: "Email"
                                 },
                                 model: {
                                   value: _vm.edit_email,
-                                  callback: function ($$v) {
+                                  callback: function($$v) {
                                     _vm.edit_email = $$v
                                   },
-                                  expression: "edit_email",
-                                },
+                                  expression: "edit_email"
+                                }
                               }),
                               _vm._v(" "),
                               _c("v-select", {
@@ -1043,25 +1043,25 @@ var render = function () {
                                   "item-value": "role_id",
                                   "item-text": "name",
                                   outlined: "",
-                                  dense: "",
+                                  dense: ""
                                 },
                                 model: {
                                   value: _vm.edit_role,
-                                  callback: function ($$v) {
+                                  callback: function($$v) {
                                     _vm.edit_role = $$v
                                   },
-                                  expression: "edit_role",
-                                },
-                              }),
+                                  expression: "edit_role"
+                                }
+                              })
                             ],
                             1
-                          ),
+                          )
                         ],
                         1
-                      ),
+                      )
                     ],
                     1
-                  ),
+                  )
                 ],
                 1
               ),
@@ -1074,15 +1074,15 @@ var render = function () {
                     {
                       attrs: { color: "teal darken-1", text: "" },
                       on: {
-                        click: function ($event) {
+                        click: function($event) {
                           return _vm.delete_user(_vm.user_id)
-                        },
-                      },
+                        }
+                      }
                     },
                     [
                       _vm._v(
                         "\r\n                    Delete\r\n                "
-                      ),
+                      )
                     ]
                   ),
                   _vm._v(" "),
@@ -1092,12 +1092,12 @@ var render = function () {
                     "v-btn",
                     {
                       attrs: { color: "teal darken-1", text: "" },
-                      on: { click: _vm.closeEdit },
+                      on: { click: _vm.closeEdit }
                     },
                     [
                       _vm._v(
                         "\r\n                    Cancel\r\n                "
-                      ),
+                      )
                     ]
                   ),
                   _vm._v(" "),
@@ -1106,26 +1106,26 @@ var render = function () {
                     {
                       attrs: { color: "teal darken-1", text: "" },
                       on: {
-                        click: function ($event) {
+                        click: function($event) {
                           return _vm.save_edit_user(_vm.user_id)
-                        },
-                      },
+                        }
+                      }
                     },
                     [
                       _vm._v(
                         "\r\n                    Update\r\n                "
-                      ),
+                      )
                     ]
-                  ),
+                  )
                 ],
                 1
-              ),
+              )
             ],
             1
-          ),
+          )
         ],
         1
-      ),
+      )
     ],
     1
   )

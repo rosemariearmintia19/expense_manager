@@ -649,7 +649,7 @@ if(false) {}
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {
+var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -665,10 +665,10 @@ var render = function () {
             "v-toolbar-title",
             {
               staticClass: "dark--text mt-10",
-              staticStyle: { "font-family": "Trebuchet MS" },
+              staticStyle: { "font-family": "Trebuchet MS" }
             },
             [_vm._v("\r\n            Expenses\r\n        ")]
-          ),
+          )
         ],
         1
       ),
@@ -682,7 +682,7 @@ var render = function () {
             "v-simple-table",
             {
               staticClass: "mt-2",
-              attrs: { dense: "", "fixed-header": "", height: "400" },
+              attrs: { dense: "", "fixed-header": "", height: "400" }
             },
             [
               _c("thead", [
@@ -692,8 +692,8 @@ var render = function () {
                     {
                       staticStyle: {
                         "background-color": "teal",
-                        color: "white",
-                      },
+                        color: "white"
+                      }
                     },
                     [_vm._v("No.")]
                   ),
@@ -703,8 +703,8 @@ var render = function () {
                     {
                       staticStyle: {
                         "background-color": "teal",
-                        color: "white",
-                      },
+                        color: "white"
+                      }
                     },
                     [_vm._v("Expense Category")]
                   ),
@@ -714,8 +714,8 @@ var render = function () {
                     {
                       staticStyle: {
                         "background-color": "teal",
-                        color: "white",
-                      },
+                        color: "white"
+                      }
                     },
                     [_vm._v("Amount")]
                   ),
@@ -725,8 +725,8 @@ var render = function () {
                     {
                       staticStyle: {
                         "background-color": "teal",
-                        color: "white",
-                      },
+                        color: "white"
+                      }
                     },
                     [_vm._v("Entry Date")]
                   ),
@@ -736,17 +736,17 @@ var render = function () {
                     {
                       staticStyle: {
                         "background-color": "teal",
-                        color: "white",
-                      },
+                        color: "white"
+                      }
                     },
                     [_vm._v("Created At")]
-                  ),
-                ]),
+                  )
+                ])
               ]),
               _vm._v(" "),
               _c(
                 "tbody",
-                _vm._l(_vm.expense_list, function (list) {
+                _vm._l(_vm.expense_list, function(list) {
                   return _c("tr", { key: list.expense_id }, [
                     _c("td", [_vm._v(_vm._s(list.expense_id) + ".")]),
                     _vm._v(" "),
@@ -761,7 +761,7 @@ var render = function () {
                               [
                                 {
                                   key: "activator",
-                                  fn: function (ref) {
+                                  fn: function(ref) {
                                     var on = ref.on
                                     var attrs = ref.attrs
                                     return [
@@ -772,10 +772,10 @@ var render = function () {
                                             {
                                               staticClass: "aa",
                                               on: {
-                                                click: function ($event) {
+                                                click: function($event) {
                                                   return _vm.UpdateExpense(list)
-                                                },
-                                              },
+                                                }
+                                              }
                                             },
                                             "span",
                                             attrs,
@@ -784,17 +784,17 @@ var render = function () {
                                           on
                                         ),
                                         [_vm._v(_vm._s(list.category_name))]
-                                      ),
+                                      )
                                     ]
-                                  },
-                                },
+                                  }
+                                }
                               ],
                               null,
                               true
-                            ),
+                            )
                           },
                           [_vm._v(" "), _c("span", [_vm._v("Update")])]
-                        ),
+                        )
                       ],
                       1
                     ),
@@ -803,13 +803,13 @@ var render = function () {
                     _vm._v(" "),
                     _c("td", [_c("span", [_vm._v(_vm._s(list.entry_date))])]),
                     _vm._v(" "),
-                    _c("td", [_c("span", [_vm._v(_vm._s(list.created_at))])]),
+                    _c("td", [_c("span", [_vm._v(_vm._s(list.created_at))])])
                   ])
                 }),
                 0
-              ),
+              )
             ]
-          ),
+          )
         ],
         1
       ),
@@ -820,10 +820,10 @@ var render = function () {
           staticClass: "white--text mt-10",
           attrs: { color: "teal", bottom: "", right: "", absolute: "" },
           on: {
-            click: function ($event) {
+            click: function($event) {
               _vm.dialog = !_vm.dialog
-            },
-          },
+            }
+          }
         },
         [_vm._v("\r\n        Add Expenses\r\n    ")]
       ),
@@ -834,11 +834,11 @@ var render = function () {
           attrs: { "max-width": "400px" },
           model: {
             value: _vm.dialog,
-            callback: function ($$v) {
+            callback: function($$v) {
               _vm.dialog = $$v
             },
-            expression: "dialog",
-          },
+            expression: "dialog"
+          }
         },
         [
           _c(
@@ -846,8 +846,8 @@ var render = function () {
             [
               _c("v-card-title", [
                 _c("span", { staticClass: "headline" }, [
-                  _vm._v(_vm._s(_vm.formTitle)),
-                ]),
+                  _vm._v(_vm._s(_vm.formTitle))
+                ])
               ]),
               _vm._v(" "),
               _c(
@@ -869,30 +869,30 @@ var render = function () {
                                   "item-value": "category_id",
                                   "item-text": "category_name",
                                   outlined: "",
-                                  dense: "",
+                                  dense: ""
                                 },
                                 model: {
                                   value: _vm.expense_category,
-                                  callback: function ($$v) {
+                                  callback: function($$v) {
                                     _vm.expense_category = $$v
                                   },
-                                  expression: "expense_category",
-                                },
+                                  expression: "expense_category"
+                                }
                               }),
                               _vm._v(" "),
                               _c("v-text-field", {
                                 attrs: {
                                   label: "Amount",
                                   outlined: "",
-                                  dense: "",
+                                  dense: ""
                                 },
                                 model: {
                                   value: _vm.amount,
-                                  callback: function ($$v) {
+                                  callback: function($$v) {
                                     _vm.amount = $$v
                                   },
-                                  expression: "amount",
-                                },
+                                  expression: "amount"
+                                }
                               }),
                               _vm._v(" "),
                               _c(
@@ -904,20 +904,20 @@ var render = function () {
                                     "return-value": _vm.entry_date,
                                     transition: "scale-transition",
                                     "offset-y": "",
-                                    "min-width": "auto",
+                                    "min-width": "auto"
                                   },
                                   on: {
-                                    "update:returnValue": function ($event) {
+                                    "update:returnValue": function($event) {
                                       _vm.entry_date = $event
                                     },
-                                    "update:return-value": function ($event) {
+                                    "update:return-value": function($event) {
                                       _vm.entry_date = $event
-                                    },
+                                    }
                                   },
                                   scopedSlots: _vm._u([
                                     {
                                       key: "activator",
-                                      fn: function (ref) {
+                                      fn: function(ref) {
                                         var on = ref.on
                                         var attrs = ref.attrs
                                         return [
@@ -930,15 +930,15 @@ var render = function () {
                                                     label: "Entry Date",
                                                     "append-icon":
                                                       "mdi-calendar",
-                                                    readonly: "",
+                                                    readonly: ""
                                                   },
                                                   model: {
                                                     value: _vm.entry_date,
-                                                    callback: function ($$v) {
+                                                    callback: function($$v) {
                                                       _vm.entry_date = $$v
                                                     },
-                                                    expression: "entry_date",
-                                                  },
+                                                    expression: "entry_date"
+                                                  }
                                                 },
                                                 "v-text-field",
                                                 attrs,
@@ -946,18 +946,18 @@ var render = function () {
                                               ),
                                               on
                                             )
-                                          ),
+                                          )
                                         ]
-                                      },
-                                    },
+                                      }
+                                    }
                                   ]),
                                   model: {
                                     value: _vm.menu,
-                                    callback: function ($$v) {
+                                    callback: function($$v) {
                                       _vm.menu = $$v
                                     },
-                                    expression: "menu",
-                                  },
+                                    expression: "menu"
+                                  }
                                 },
                                 [
                                   _vm._v(" "),
@@ -967,11 +967,11 @@ var render = function () {
                                       attrs: { "no-title": "", scrollable: "" },
                                       model: {
                                         value: _vm.entry_date,
-                                        callback: function ($$v) {
+                                        callback: function($$v) {
                                           _vm.entry_date = $$v
                                         },
-                                        expression: "entry_date",
-                                      },
+                                        expression: "entry_date"
+                                      }
                                     },
                                     [
                                       _c("v-spacer"),
@@ -981,15 +981,15 @@ var render = function () {
                                         {
                                           attrs: { text: "", color: "primary" },
                                           on: {
-                                            click: function ($event) {
+                                            click: function($event) {
                                               _vm.menu = false
-                                            },
-                                          },
+                                            }
+                                          }
                                         },
                                         [
                                           _vm._v(
                                             "\r\n                                        Cancel\r\n                                    "
-                                          ),
+                                          )
                                         ]
                                       ),
                                       _vm._v(" "),
@@ -998,34 +998,34 @@ var render = function () {
                                         {
                                           attrs: { text: "", color: "primary" },
                                           on: {
-                                            click: function ($event) {
+                                            click: function($event) {
                                               return _vm.$refs.menu.save(
                                                 _vm.entry_date
                                               )
-                                            },
-                                          },
+                                            }
+                                          }
                                         },
                                         [
                                           _vm._v(
                                             "\r\n                                        OK\r\n                                    "
-                                          ),
+                                          )
                                         ]
-                                      ),
+                                      )
                                     ],
                                     1
-                                  ),
+                                  )
                                 ],
                                 1
-                              ),
+                              )
                             ],
                             1
-                          ),
+                          )
                         ],
                         1
-                      ),
+                      )
                     ],
                     1
-                  ),
+                  )
                 ],
                 1
               ),
@@ -1039,12 +1039,12 @@ var render = function () {
                     "v-btn",
                     {
                       attrs: { color: "teal darken-1", text: "" },
-                      on: { click: _vm.close },
+                      on: { click: _vm.close }
                     },
                     [
                       _vm._v(
                         "\r\n                    Cancel\r\n                "
-                      ),
+                      )
                     ]
                   ),
                   _vm._v(" "),
@@ -1052,16 +1052,16 @@ var render = function () {
                     "v-btn",
                     {
                       attrs: { color: "teal darken-1", text: "" },
-                      on: { click: _vm.save_new_expenses },
+                      on: { click: _vm.save_new_expenses }
                     },
                     [_vm._v("\r\n                    Save\r\n                ")]
-                  ),
+                  )
                 ],
                 1
-              ),
+              )
             ],
             1
-          ),
+          )
         ],
         1
       ),
@@ -1072,11 +1072,11 @@ var render = function () {
           attrs: { "max-width": "400px" },
           model: {
             value: _vm.UpdateExpenseDialog,
-            callback: function ($$v) {
+            callback: function($$v) {
               _vm.UpdateExpenseDialog = $$v
             },
-            expression: "UpdateExpenseDialog",
-          },
+            expression: "UpdateExpenseDialog"
+          }
         },
         [
           _c(
@@ -1087,8 +1087,8 @@ var render = function () {
                 { staticStyle: { "background-color": "teal", color: "white" } },
                 [
                   _c("span", { staticClass: "headline" }, [
-                    _vm._v("Update Category"),
-                  ]),
+                    _vm._v("Update Category")
+                  ])
                 ]
               ),
               _vm._v(" "),
@@ -1113,15 +1113,15 @@ var render = function () {
                                     "item-value": "category_id",
                                     "item-text": "category_name",
                                     outlined: "",
-                                    dense: "",
+                                    dense: ""
                                   },
                                   model: {
                                     value: _vm.edit_category,
-                                    callback: function ($$v) {
+                                    callback: function($$v) {
                                       _vm.edit_category = $$v
                                     },
-                                    expression: "edit_category",
-                                  },
+                                    expression: "edit_category"
+                                  }
                                 },
                                 [_vm._v(_vm._s(_vm.edit_category))]
                               ),
@@ -1130,15 +1130,15 @@ var render = function () {
                                 attrs: {
                                   label: "Amount",
                                   outlined: "",
-                                  dense: "",
+                                  dense: ""
                                 },
                                 model: {
                                   value: _vm.edit_amount,
-                                  callback: function ($$v) {
+                                  callback: function($$v) {
                                     _vm.edit_amount = $$v
                                   },
-                                  expression: "edit_amount",
-                                },
+                                  expression: "edit_amount"
+                                }
                               }),
                               _vm._v(" "),
                               _c(
@@ -1150,20 +1150,20 @@ var render = function () {
                                     "return-value": _vm.edit_entry_date,
                                     transition: "scale-transition",
                                     "offset-y": "",
-                                    "min-width": "auto",
+                                    "min-width": "auto"
                                   },
                                   on: {
-                                    "update:returnValue": function ($event) {
+                                    "update:returnValue": function($event) {
                                       _vm.edit_entry_date = $event
                                     },
-                                    "update:return-value": function ($event) {
+                                    "update:return-value": function($event) {
                                       _vm.edit_entry_date = $event
-                                    },
+                                    }
                                   },
                                   scopedSlots: _vm._u([
                                     {
                                       key: "activator",
-                                      fn: function (ref) {
+                                      fn: function(ref) {
                                         var on = ref.on
                                         var attrs = ref.attrs
                                         return [
@@ -1176,16 +1176,16 @@ var render = function () {
                                                     label: "Entry Date",
                                                     "append-icon":
                                                       "mdi-calendar",
-                                                    readonly: "",
+                                                    readonly: ""
                                                   },
                                                   model: {
                                                     value: _vm.edit_entry_date,
-                                                    callback: function ($$v) {
+                                                    callback: function($$v) {
                                                       _vm.edit_entry_date = $$v
                                                     },
                                                     expression:
-                                                      "edit_entry_date",
-                                                  },
+                                                      "edit_entry_date"
+                                                  }
                                                 },
                                                 "v-text-field",
                                                 attrs,
@@ -1193,18 +1193,18 @@ var render = function () {
                                               ),
                                               on
                                             )
-                                          ),
+                                          )
                                         ]
-                                      },
-                                    },
+                                      }
+                                    }
                                   ]),
                                   model: {
                                     value: _vm.edit_menu,
-                                    callback: function ($$v) {
+                                    callback: function($$v) {
                                       _vm.edit_menu = $$v
                                     },
-                                    expression: "edit_menu",
-                                  },
+                                    expression: "edit_menu"
+                                  }
                                 },
                                 [
                                   _vm._v(" "),
@@ -1214,11 +1214,11 @@ var render = function () {
                                       attrs: { "no-title": "", scrollable: "" },
                                       model: {
                                         value: _vm.edit_entry_date,
-                                        callback: function ($$v) {
+                                        callback: function($$v) {
                                           _vm.edit_entry_date = $$v
                                         },
-                                        expression: "edit_entry_date",
-                                      },
+                                        expression: "edit_entry_date"
+                                      }
                                     },
                                     [
                                       _c("v-spacer"),
@@ -1228,15 +1228,15 @@ var render = function () {
                                         {
                                           attrs: { text: "", color: "primary" },
                                           on: {
-                                            click: function ($event) {
+                                            click: function($event) {
                                               _vm.edit_menu = false
-                                            },
-                                          },
+                                            }
+                                          }
                                         },
                                         [
                                           _vm._v(
                                             "\r\n                                        Cancel\r\n                                    "
-                                          ),
+                                          )
                                         ]
                                       ),
                                       _vm._v(" "),
@@ -1245,34 +1245,34 @@ var render = function () {
                                         {
                                           attrs: { text: "", color: "primary" },
                                           on: {
-                                            click: function ($event) {
+                                            click: function($event) {
                                               return _vm.$refs.edit_menu.save(
                                                 _vm.edit_entry_date
                                               )
-                                            },
-                                          },
+                                            }
+                                          }
                                         },
                                         [
                                           _vm._v(
                                             "\r\n                                        OK\r\n                                    "
-                                          ),
+                                          )
                                         ]
-                                      ),
+                                      )
                                     ],
                                     1
-                                  ),
+                                  )
                                 ],
                                 1
-                              ),
+                              )
                             ],
                             1
-                          ),
+                          )
                         ],
                         1
-                      ),
+                      )
                     ],
                     1
-                  ),
+                  )
                 ],
                 1
               ),
@@ -1285,15 +1285,15 @@ var render = function () {
                     {
                       attrs: { color: "teal darken-1", text: "" },
                       on: {
-                        click: function ($event) {
+                        click: function($event) {
                           return _vm.delete_expense(_vm.expense_id)
-                        },
-                      },
+                        }
+                      }
                     },
                     [
                       _vm._v(
                         "\r\n                    Delete\r\n                "
-                      ),
+                      )
                     ]
                   ),
                   _vm._v(" "),
@@ -1303,12 +1303,12 @@ var render = function () {
                     "v-btn",
                     {
                       attrs: { color: "teal darken-1", text: "" },
-                      on: { click: _vm.closeEdit },
+                      on: { click: _vm.closeEdit }
                     },
                     [
                       _vm._v(
                         "\r\n                    Cancel\r\n                "
-                      ),
+                      )
                     ]
                   ),
                   _vm._v(" "),
@@ -1317,26 +1317,26 @@ var render = function () {
                     {
                       attrs: { color: "teal darken-1", text: "" },
                       on: {
-                        click: function ($event) {
+                        click: function($event) {
                           return _vm.save_edit_expense(_vm.expense_id)
-                        },
-                      },
+                        }
+                      }
                     },
                     [
                       _vm._v(
                         "\r\n                    Update\r\n                "
-                      ),
+                      )
                     ]
-                  ),
+                  )
                 ],
                 1
-              ),
+              )
             ],
             1
-          ),
+          )
         ],
         1
-      ),
+      )
     ],
     1
   )

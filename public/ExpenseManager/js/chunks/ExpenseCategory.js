@@ -593,7 +593,7 @@ if(false) {}
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {
+var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -609,21 +609,21 @@ var render = function () {
             "v-toolbar",
             {
               staticClass: "mt-10",
-              attrs: { light: "", extended: "", height: "4" },
+              attrs: { light: "", extended: "", height: "4" }
             },
             [
               _c(
                 "v-toolbar-title",
                 {
                   staticClass: "dark--text mt-10",
-                  staticStyle: { "font-family": "Trebuchet MS" },
+                  staticStyle: { "font-family": "Trebuchet MS" }
                 },
                 [
                   _vm._v(
                     "\r\n                Expense Categories\r\n            "
-                  ),
+                  )
                 ]
-              ),
+              )
             ],
             1
           ),
@@ -634,7 +634,7 @@ var render = function () {
             "v-simple-table",
             {
               staticClass: "mt-10",
-              attrs: { dense: "", "fixed-header": "", height: "400" },
+              attrs: { dense: "", "fixed-header": "", height: "400" }
             },
             [
               _c("thead", [
@@ -644,8 +644,8 @@ var render = function () {
                     {
                       staticStyle: {
                         "background-color": "teal",
-                        color: "white",
-                      },
+                        color: "white"
+                      }
                     },
                     [_vm._v("No.")]
                   ),
@@ -655,8 +655,8 @@ var render = function () {
                     {
                       staticStyle: {
                         "background-color": "teal",
-                        color: "white",
-                      },
+                        color: "white"
+                      }
                     },
                     [_vm._v("Display Name")]
                   ),
@@ -666,8 +666,8 @@ var render = function () {
                     {
                       staticStyle: {
                         "background-color": "teal",
-                        color: "white",
-                      },
+                        color: "white"
+                      }
                     },
                     [_vm._v("Description")]
                   ),
@@ -677,17 +677,17 @@ var render = function () {
                     {
                       staticStyle: {
                         "background-color": "teal",
-                        color: "white",
-                      },
+                        color: "white"
+                      }
                     },
                     [_vm._v("Actions")]
-                  ),
-                ]),
+                  )
+                ])
               ]),
               _vm._v(" "),
               _c(
                 "tbody",
-                _vm._l(_vm.category_lists, function (list) {
+                _vm._l(_vm.category_lists, function(list) {
                   return _c("tr", { key: list.category_id }, [
                     _c("td", [_vm._v(_vm._s(list.category_id) + ".")]),
                     _vm._v(" "),
@@ -702,7 +702,7 @@ var render = function () {
                               [
                                 {
                                   key: "activator",
-                                  fn: function (ref) {
+                                  fn: function(ref) {
                                     var on = ref.on
                                     var attrs = ref.attrs
                                     return [
@@ -713,12 +713,12 @@ var render = function () {
                                             {
                                               staticClass: "aa",
                                               on: {
-                                                click: function ($event) {
+                                                click: function($event) {
                                                   return _vm.UpdateCategory(
                                                     list
                                                   )
-                                                },
-                                              },
+                                                }
+                                              }
                                             },
                                             "span",
                                             attrs,
@@ -727,17 +727,17 @@ var render = function () {
                                           on
                                         ),
                                         [_vm._v(_vm._s(list.category_name))]
-                                      ),
+                                      )
                                     ]
-                                  },
-                                },
+                                  }
+                                }
                               ],
                               null,
                               true
-                            ),
+                            )
                           },
                           [_vm._v(" "), _c("span", [_vm._v("Update")])]
-                        ),
+                        )
                       ],
                       1
                     ),
@@ -749,14 +749,14 @@ var render = function () {
                         "\r\n                        " +
                           _vm._s(list.created_at) +
                           "\r\n                    "
-                      ),
-                    ]),
+                      )
+                    ])
                   ])
                 }),
                 0
-              ),
+              )
             ]
-          ),
+          )
         ],
         1
       ),
@@ -767,10 +767,10 @@ var render = function () {
           staticClass: "white--text",
           attrs: { color: "teal", bottom: "", right: "", absolute: "" },
           on: {
-            click: function ($event) {
+            click: function($event) {
               _vm.dialog = !_vm.dialog
-            },
-          },
+            }
+          }
         },
         [_vm._v("\r\n        Add Category\r\n    ")]
       ),
@@ -781,11 +781,11 @@ var render = function () {
           attrs: { "max-width": "400px" },
           model: {
             value: _vm.dialog,
-            callback: function ($$v) {
+            callback: function($$v) {
               _vm.dialog = $$v
             },
-            expression: "dialog",
-          },
+            expression: "dialog"
+          }
         },
         [
           _c(
@@ -796,8 +796,8 @@ var render = function () {
                 { staticStyle: { "background-color": "teal", color: "white" } },
                 [
                   _c("span", { staticClass: "headline" }, [
-                    _vm._v(_vm._s(_vm.formTitle)),
-                  ]),
+                    _vm._v(_vm._s(_vm.formTitle))
+                  ])
                 ]
               ),
               _vm._v(" "),
@@ -817,40 +817,40 @@ var render = function () {
                                 attrs: {
                                   label: "Category name",
                                   outlined: "",
-                                  dense: "",
+                                  dense: ""
                                 },
                                 model: {
                                   value: _vm.category_name,
-                                  callback: function ($$v) {
+                                  callback: function($$v) {
                                     _vm.category_name = $$v
                                   },
-                                  expression: "category_name",
-                                },
+                                  expression: "category_name"
+                                }
                               }),
                               _vm._v(" "),
                               _c("v-text-field", {
                                 attrs: {
                                   label: "Description",
                                   outlined: "",
-                                  dense: "",
+                                  dense: ""
                                 },
                                 model: {
                                   value: _vm.description,
-                                  callback: function ($$v) {
+                                  callback: function($$v) {
                                     _vm.description = $$v
                                   },
-                                  expression: "description",
-                                },
-                              }),
+                                  expression: "description"
+                                }
+                              })
                             ],
                             1
-                          ),
+                          )
                         ],
                         1
-                      ),
+                      )
                     ],
                     1
-                  ),
+                  )
                 ],
                 1
               ),
@@ -864,12 +864,12 @@ var render = function () {
                     "v-btn",
                     {
                       attrs: { color: "teal darken-1", text: "" },
-                      on: { click: _vm.close },
+                      on: { click: _vm.close }
                     },
                     [
                       _vm._v(
                         "\r\n                    Cancel\r\n                "
-                      ),
+                      )
                     ]
                   ),
                   _vm._v(" "),
@@ -877,16 +877,16 @@ var render = function () {
                     "v-btn",
                     {
                       attrs: { color: "teal darken-1", text: "" },
-                      on: { click: _vm.save_new_category },
+                      on: { click: _vm.save_new_category }
                     },
                     [_vm._v("\r\n                    Save\r\n                ")]
-                  ),
+                  )
                 ],
                 1
-              ),
+              )
             ],
             1
-          ),
+          )
         ],
         1
       ),
@@ -897,11 +897,11 @@ var render = function () {
           attrs: { "max-width": "400px" },
           model: {
             value: _vm.UpdateCategoryDialog,
-            callback: function ($$v) {
+            callback: function($$v) {
               _vm.UpdateCategoryDialog = $$v
             },
-            expression: "UpdateCategoryDialog",
-          },
+            expression: "UpdateCategoryDialog"
+          }
         },
         [
           _c(
@@ -912,8 +912,8 @@ var render = function () {
                 { staticStyle: { "background-color": "teal", color: "white" } },
                 [
                   _c("span", { staticClass: "headline" }, [
-                    _vm._v("Update Category"),
-                  ]),
+                    _vm._v("Update Category")
+                  ])
                 ]
               ),
               _vm._v(" "),
@@ -935,15 +935,15 @@ var render = function () {
                                   attrs: {
                                     label: "Display Name",
                                     outlined: "",
-                                    dense: "",
+                                    dense: ""
                                   },
                                   model: {
                                     value: _vm.edit_display_name,
-                                    callback: function ($$v) {
+                                    callback: function($$v) {
                                       _vm.edit_display_name = $$v
                                     },
-                                    expression: "edit_display_name",
-                                  },
+                                    expression: "edit_display_name"
+                                  }
                                 },
                                 [_vm._v(_vm._s(_vm.edit_display_name))]
                               ),
@@ -954,27 +954,27 @@ var render = function () {
                                   attrs: {
                                     label: "Description",
                                     outlined: "",
-                                    dense: "",
+                                    dense: ""
                                   },
                                   model: {
                                     value: _vm.edit_description,
-                                    callback: function ($$v) {
+                                    callback: function($$v) {
                                       _vm.edit_description = $$v
                                     },
-                                    expression: "edit_description",
-                                  },
+                                    expression: "edit_description"
+                                  }
                                 },
                                 [_vm._v(_vm._s(_vm.edit_description))]
-                              ),
+                              )
                             ],
                             1
-                          ),
+                          )
                         ],
                         1
-                      ),
+                      )
                     ],
                     1
-                  ),
+                  )
                 ],
                 1
               ),
@@ -987,15 +987,15 @@ var render = function () {
                     {
                       attrs: { color: "teal darken-1", text: "" },
                       on: {
-                        click: function ($event) {
+                        click: function($event) {
                           return _vm.delete_category(_vm.category_id)
-                        },
-                      },
+                        }
+                      }
                     },
                     [
                       _vm._v(
                         "\r\n                    Delete\r\n                "
-                      ),
+                      )
                     ]
                   ),
                   _vm._v(" "),
@@ -1005,12 +1005,12 @@ var render = function () {
                     "v-btn",
                     {
                       attrs: { color: "teal darken-1", text: "" },
-                      on: { click: _vm.closeEdit },
+                      on: { click: _vm.closeEdit }
                     },
                     [
                       _vm._v(
                         "\r\n                    Cancel\r\n                "
-                      ),
+                      )
                     ]
                   ),
                   _vm._v(" "),
@@ -1019,26 +1019,26 @@ var render = function () {
                     {
                       attrs: { color: "teal darken-1", text: "" },
                       on: {
-                        click: function ($event) {
+                        click: function($event) {
                           return _vm.save_edit_category(_vm.category_id)
-                        },
-                      },
+                        }
+                      }
                     },
                     [
                       _vm._v(
                         "\r\n                    Update\r\n                "
-                      ),
+                      )
                     ]
-                  ),
+                  )
                 ],
                 1
-              ),
+              )
             ],
             1
-          ),
+          )
         ],
         1
-      ),
+      )
     ],
     1
   )

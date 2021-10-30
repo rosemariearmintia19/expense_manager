@@ -159,7 +159,7 @@ if(false) {}
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {
+var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -181,14 +181,14 @@ var render = function () {
                     "v-toolbar-title",
                     {
                       staticClass: "dark--text mt-10",
-                      staticStyle: { "font-family": "Trebuchet MS" },
+                      staticStyle: { "font-family": "Trebuchet MS" }
                     },
                     [
                       _vm._v(
                         "\r\n                        My Expenses\r\n                    "
-                      ),
+                      )
                     ]
-                  ),
+                  )
                 ],
                 1
               ),
@@ -197,30 +197,30 @@ var render = function () {
                 _c("thead", [
                   _c("tr", [
                     _c("th", { staticStyle: { "background-color": "teal" } }, [
-                      _vm._v("Categories"),
+                      _vm._v("Categories")
                     ]),
                     _vm._v(" "),
                     _c("th", { staticStyle: { "background-color": "teal" } }, [
-                      _vm._v("Total"),
-                    ]),
-                  ]),
+                      _vm._v("Total")
+                    ])
+                  ])
                 ]),
                 _vm._v(" "),
                 _c(
                   "tbody",
-                  _vm._l(_vm.expenses, function (list) {
+                  _vm._l(_vm.expenses, function(list) {
                     return _c("tr", { key: list.expense_id }, [
                       _c("td", [_vm._v(_vm._s(list.category))]),
                       _vm._v(" "),
-                      _c("td", [_vm._v("$" + _vm._s(list.total_amount))]),
+                      _c("td", [_vm._v("$" + _vm._s(list.total_amount))])
                     ])
                   }),
                   0
-                ),
-              ]),
+                )
+              ])
             ],
             1
-          ),
+          )
         ],
         1
       ),
@@ -230,8 +230,8 @@ var render = function () {
         { staticClass: "col-sm-6" },
         [_c("highcharts", { attrs: { options: _vm.chartOptions } })],
         1
-      ),
-    ]),
+      )
+    ])
   ])
 }
 var staticRenderFns = []

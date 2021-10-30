@@ -39090,14 +39090,14 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {
+var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _vm._m(0)
 }
 var staticRenderFns = [
-  function () {
+  function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
@@ -39106,19 +39106,19 @@ var staticRenderFns = [
         _c("div", { staticClass: "col-md-8" }, [
           _c("div", { staticClass: "card" }, [
             _c("div", { staticClass: "card-header" }, [
-              _vm._v("Example Component"),
+              _vm._v("Example Component")
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "card-body" }, [
               _vm._v(
                 "\n                    I'm an example component.\n                "
-              ),
-            ]),
-          ]),
-        ]),
-      ]),
+              )
+            ])
+          ])
+        ])
+      ])
     ])
-  },
+  }
 ]
 render._withStripped = true
 
@@ -39137,7 +39137,7 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {
+var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -39161,7 +39161,7 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {
+var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
@@ -39176,10 +39176,10 @@ var render = function () {
           _vm._v(" "),
           _c("router-view"),
           _vm._v(" "),
-          _c("router-view", { attrs: { name: "Footer" } }),
+          _c("router-view", { attrs: { name: "Footer" } })
         ],
         1
-      ),
+      )
     ],
     1
   )
@@ -39313,7 +39313,7 @@ function normalizeComponent (
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /*!
-  * vue-router v3.5.3
+  * vue-router v3.5.2
   * (c) 2021 Evan You
   * @license MIT
   */
@@ -39326,7 +39326,7 @@ function assert (condition, message) {
 }
 
 function warn (condition, message) {
-  if (!condition) {
+  if ( true && !condition) {
     typeof console !== 'undefined' && console.warn(("[vue-router] " + message));
   }
 }
@@ -39832,7 +39832,7 @@ function parsePath (path) {
 }
 
 function cleanPath (path) {
-  return path.replace(/\/+/g, '/')
+  return path.replace(/\/\//g, '/')
 }
 
 var isarray = Array.isArray || function (arr) {
@@ -41624,9 +41624,7 @@ History.prototype.confirmTransition = function confirmTransition (route, onCompl
           cb(err);
         });
       } else {
-        if (true) {
-          warn(false, 'uncaught error during route navigation:');
-        }
+        warn(false, 'uncaught error during route navigation:');
         console.error(err);
       }
     }
@@ -41641,9 +41639,6 @@ History.prototype.confirmTransition = function confirmTransition (route, onCompl
     route.matched[lastRouteIndex] === current.matched[lastCurrentIndex]
   ) {
     this.ensureURL();
-    if (route.hash) {
-      handleScroll(this.router, current, route, false);
-    }
     return abort(createNavigationDuplicatedError(current, route))
   }
 
@@ -42207,9 +42202,6 @@ var AbstractHistory = /*@__PURE__*/(function (History) {
 var VueRouter = function VueRouter (options) {
   if ( options === void 0 ) options = {};
 
-  if (true) {
-    warn(this instanceof VueRouter, "Router must be called with the new operator.");
-  }
   this.app = null;
   this.apps = [];
   this.options = options;
@@ -42454,7 +42446,7 @@ function createHref (base, fullPath, mode) {
 }
 
 VueRouter.install = install;
-VueRouter.version = '3.5.3';
+VueRouter.version = '3.5.2';
 VueRouter.isNavigationFailure = isNavigationFailure;
 VueRouter.NavigationFailureType = NavigationFailureType;
 VueRouter.START_LOCATION = START;
@@ -101580,7 +101572,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
   // base: '/ExpenseManager',
   mode: 'history',
   routes: [{
-    path: '/login',
+    path: '/',
     name: 'login',
     components: {
       "default": function _default() {
@@ -101882,8 +101874,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! c:\xampp\htdocs\ExpenseManager\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! c:\xampp\htdocs\ExpenseManager\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\xampp\htdocs\expense_manager\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\expense_manager\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
