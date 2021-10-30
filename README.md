@@ -1,6 +1,4 @@
-# expense_manager
-
-<p>Hello kindly read my message, thank you</p>
+#Hello kindly read my message, thank you
 <p>Please choose git master to see my file</p>
 <p>Please run npm install and composer install to remove error in vendor autoload</p>
 <p>Please add database name = expense_management in your database(mysql)</p>
