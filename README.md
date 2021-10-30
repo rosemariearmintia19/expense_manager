@@ -1,6 +1,12 @@
+
+<p>Hello kindly read my message, thank you</p>
+<p>Please run npm install and composer install to remove error in vendor autoload</p>
+<p>Please add database name = expense_management in your database(mysql)</p>
+<p>Please run php artisan migrate</p>
 <p>Please run php artisan serve</p>
-<p>Database name = expense_management</p>
 <p>Please Add Admin Role in roles table in database</p>
+
+
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
